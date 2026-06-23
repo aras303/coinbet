@@ -1,13 +1,13 @@
 export default async function handler(req, res) {
 
   const response = await fetch(
-  "https://api.football-data.org/v4/matches",
-  {
-    headers: {
-      "X-Auth-Token": "5abad29ba46d4c0082d41217d74e913d"
+    "https://v3.football.api-sports.io/fixtures?next=50",
+    {
+      headers: {
+        "x-apisports-key": "dfd781a849a72523f6bcaa1ffc7c967a"
+      }
     }
-  }
-);
+  );
 
   const data = await response.json();
 
