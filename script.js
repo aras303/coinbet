@@ -163,19 +163,10 @@ loadUser();
 }
 async function loadMatches(){
 
-const token = "5abad29ba46d4c0082d41217d74e913d";
 
 try{
 
-const response = await fetch(
-"https://api.football-data.org/v4/matches",
-{
-headers:{
-"X-Auth-Token": token
-}
-}
-);
-
+const response = await fetch("/api/matches");
 const data = await response.json();
 
 let html = "";
