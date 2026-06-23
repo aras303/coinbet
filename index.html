@@ -4,326 +4,83 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CoinBet</title>
-
-<style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#08142b;
-color:white;
-}
-
-header{
-background:#0d1f45;
-padding:20px;
-text-align:center;
-font-size:32px;
-font-weight:bold;
-color:#39ff14;
-}
-
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
-}
-
-.card{
-background:#102a66;
-padding:20px;
-border-radius:20px;
-margin-bottom:20px;
-}
-
-input{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:none;
-margin-top:10px;
-box-sizing:border-box;
-}
-
-button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:10px;
-background:#39ff14;
-font-weight:bold;
-cursor:pointer;
-margin-top:10px;
-}
-
-.match{
-background:#16357f;
-padding:15px;
-border-radius:15px;
-margin-top:15px;
-}
-
-.odds{
-color:gold;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>⚽ CoinBet</header>
-
-<div class="container">
-
-<div class="card" id="loginBox">
-<h2>Giriş</h2>
-<input id="username" placeholder="Kullanıcı adı">
-<button onclick="login()">Giriş Yap</button>
-</div>
-
-<div id="app" style="display:none;">
+<div id="loginPage" class="center">
 
 <div class="card">
-<h2 id="welcome"></h2>
-<h3 id="balance"></h3>
+
+<h1>⚽ CoinBet</h1>
+
+<input
+id="username"
+type="text"
+placeholder="Kullanıcı Adı">
+
+<button onclick="register()">
+Kayıt Ol
+</button>
+
+<button onclick="login()">
+Giriş Yap
+</button>
+
+</div>
+
+</div>
+
+<div id="appPage" style="display:none;">
+
+<header>
+
+<h1>⚽ CoinBet</h1>
+
+<div class="coins">
+🪙 <span id="coinAmount">1000</span>
+</div>
+
+</header>
+
+<div class="card">
+
+<h2>
+Hoşgeldin
+<span id="playerName"></span>
+</h2>
+
+<button onclick="dailyBonus()">
+🎁 Günlük Bonus
+</button>
+
+<button onclick="logout()">
+🚪 Çıkış Yap
+</button>
+
 </div>
 
 <div class="card">
-<h3>🎁 Ödüller</h3>
-<button onclick="dailyBonus()">Günlük Bonus +500</button>
-<button onclick="watchAd()">Reklam İzle +100</button>
-</div>
 
-<div class="card">
-<h3>💰 Bahis Miktarı</h3>
-<input id="amount" type="number" placeholder="Coin miktarı">
-</div>
-
+<h2>Maçlar</h2>
 <div id="matches"></div>
 
+</div>
+
+</div>
+
 <div class="card">
-<button onclick="showHistory()">📜 Geçmiş</button>
-<button onclick="showLeaderboard()">🏆 Liderlik</button>
-<button onclick="logout()">🚪 Çıkış</button>
-</div>
+
+<h2>Geçmiş</h2>
+
+<div id="history"></div>
 
 </div>
 
 </div>
 
-<script>
-
-const matches=[
-["Manchester City","Liverpool",1.80],
-["Real Madrid","Barcelona",2.10],
-["Galatasaray","Fenerbahçe",1.95],
-["Arsenal","Chelsea",2.05],
-["PSG","Bayern",2.20]
-];
-
-let currentUser="";
-
-if(localStorage.getItem("currentUser")){
-startGame(localStorage.getItem("currentUser"));
-}
-
-function login(){
-
-let username=document.getElementById("username").value;
-
-if(username===""){
-alert("Kullanıcı adı gir");
-return;
-}
-
-currentUser=username;
-
-localStorage.setItem("currentUser",username);
-
-if(!localStorage.getItem(username+"_coins")){
-localStorage.setItem(username+"_coins",5000);
-}
-
-startGame(username);
-}
-
-function startGame(username){
-
-currentUser=username;
-
-document.getElementById("loginBox").style.display="none";
-document.getElementById("app").style.display="block";
-
-document.getElementById("welcome").innerHTML=
-"Hoşgeldin "+username;
-
-createMatches();
-updateBalance();
-}
-
-function createMatches(){
-
-let html="";
-
-matches.forEach(match=>{
-
-html+=`
-<div class="match">
-<h2>${match[0]} vs ${match[1]}</h2>
-<p class="odds">Oran: ${match[2]}</p>
-<button onclick="bet(${match[2]},'${match[0]}')">Bahis Yap</button>
-</div>
-`;
-
-});
-
-document.getElementById("matches").innerHTML=html;
-}
-
-function updateBalance(){
-
-let coins=parseInt(
-localStorage.getItem(currentUser+"_coins")
-);
-
-document.getElementById("balance").innerHTML=
-"🪙 Coin: "+coins;
-}
-
-function dailyBonus(){
-
-let today=new Date().toDateString();
-
-if(localStorage.getItem(currentUser+"_bonus")==today){
-alert("Bugünkü bonus alındı");
-return;
-}
-
-let coins=parseInt(
-localStorage.getItem(currentUser+"_coins")
-);
-
-coins+=500;
-
-localStorage.setItem(currentUser+"_coins",coins);
-localStorage.setItem(currentUser+"_bonus",today);
-
-updateBalance();
-}
-
-function watchAd(){
-
-let coins=parseInt(
-localStorage.getItem(currentUser+"_coins")
-);
-
-coins+=100;
-
-localStorage.setItem(currentUser+"_coins",coins);
-
-updateBalance();
-}
-
-function bet(odds,team){
-
-let amount=parseInt(
-document.getElementById("amount").value
-);
-
-if(!amount || amount<=0){
-alert("Miktar gir");
-return;
-}
-
-let coins=parseInt(
-localStorage.getItem(currentUser+"_coins")
-);
-
-if(amount>coins){
-alert("Yetersiz coin");
-return;
-}
-
-if(Math.random()>0.5){
-
-let win=Math.floor(amount*odds);
-
-coins+=win;
-
-saveHistory("✅ "+team+" kazandı +"+win);
-
-alert("Kazandın!");
-
-}else{
-
-coins-=amount;
-
-saveHistory("❌ "+team+" kaybetti -"+amount);
-
-alert("Kaybettin!");
-}
-
-localStorage.setItem(
-currentUser+"_coins",
-coins
-);
-
-updateBalance();
-}
-
-function saveHistory(text){
-
-let history=
-JSON.parse(localStorage.getItem("history"))||[];
-
-history.unshift(text);
-
-localStorage.setItem(
-"history",
-JSON.stringify(history)
-);
-}
-
-function showHistory(){
-
-let history=
-JSON.parse(localStorage.getItem("history"))||[];
-
-if(history.length===0){
-alert("Geçmiş boş");
-return;
-}
-
-alert(history.join("\n"));
-}
-
-function showLeaderboard(){
-
-let text="🏆 Liderlik\n\n";
-
-for(let i=0;i<localStorage.length;i++){
-
-let key=localStorage.key(i);
-
-if(key.endsWith("_coins")){
-
-text+=
-key.replace("_coins","")+
-" - "+
-localStorage.getItem(key)+
-" coin\n";
-
-}
-}
-
-alert(text);
-}
-
-function logout(){
-
-localStorage.removeItem("currentUser");
-location.reload();
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
