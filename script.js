@@ -1,211 +1,232 @@
 let currentUser = localStorage.getItem("currentUser");
 
 if(currentUser){
-showApp();
+    showApp();
 }
 
 function register(){
 
-let username =
-document.getElementById("username").value;
+    let username =
+    document.getElementById("username").value;
 
-if(username===""){
-alert("Kullanıcı adı gir");
-return;
-}
+    if(username===""){
+        alert("Kullanıcı adı gir");
+        return;
+    }
 
-let user = {
-coins:1000,
-history:[]
-};
+    let user = {
+        coins:1000,
+        history:[]
+    };
 
-localStorage.setItem(
-"user_"+username,
-JSON.stringify(user)
-);
+    localStorage.setItem(
+        "user_"+username,
+        JSON.stringify(user)
+    );
 
-alert("Kayıt başarılı!");
+    alert("Kayıt başarılı!");
 }
 
 function login(){
 
-let username =
-document.getElementById("username").value;
+    let username =
+    document.getElementById("username").value;
 
-let user =
-localStorage.getItem("user_"+username);
+    let user =
+    localStorage.getItem("user_"+username);
 
-if(!user){
-alert("Önce kayıt ol");
-return;
-}
+    if(!user){
+        alert("Önce kayıt ol");
+        return;
+    }
 
-localStorage.setItem(
-"currentUser",
-username
-);
+    localStorage.setItem(
+        "currentUser",
+        username
+    );
 
-showApp();
+    showApp();
 }
 
 function showApp(){
 
-currentUser =
-localStorage.getItem("currentUser");
+    currentUser =
+    localStorage.getItem("currentUser");
 
-document.getElementById("loginPage").style.display="none";
-document.getElementById("appPage").style.display="block";
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("appPage").style.display="block";
 
-document.getElementById("playerName").innerText =
-currentUser;
+    document.getElementById("playerName").innerText =
+    currentUser;
 
-loadUser();
-loadMatches();
+    loadUser();
+    loadMatches();
 }
 
 function loadUser(){
-let user =
-JSON.parse(
-localStorage.getItem(
-"user_"+currentUser
-)
-);
 
-document.getElementById("coinAmount").innerText =
-user.coins;
+    let user =
+    JSON.parse(
+        localStorage.getItem(
+            "user_"+currentUser
+        )
+    );
 
-let html="";
+    document.getElementById("coinAmount").innerText =
+    user.coins;
 
-user.history.forEach(item=>{
-html += "<p>"+item+"</p>";
-});
+    let html="";
 
-document.getElementById("history").innerHTML =
-html;
+    user.history.forEach(item=>{
+        html += "<p>"+item+"</p>";
+    });
+
+    document.getElementById("history").innerHTML =
+    html;
 }
 
 function saveUser(user){
 
-localStorage.setItem(
-"user_"+currentUser,
-JSON.stringify(user)
-);
-
+    localStorage.setItem(
+        "user_"+currentUser,
+        JSON.stringify(user)
+    );
 }
 
 function dailyBonus(){
 
-let user =
-JSON.parse(
-localStorage.getItem(
-"user_"+currentUser
-)
-);
+    let user =
+    JSON.parse(
+        localStorage.getItem(
+            "user_"+currentUser
+        )
+    );
 
-user.coins += 500;
+    user.coins += 500;
 
-user.history.unshift(
-"🎁 Günlük Bonus +500"
-);
+    user.history.unshift(
+        "🎁 Günlük Bonus +500"
+    );
 
-saveUser(user);
-
-loadUser();
+    saveUser(user);
+    loadUser();
 }
 
 function bet(team){
 
-let amount =
-prompt("Kaç coin bahis yapmak istiyorsun?");
+    let amount =
+    prompt("Kaç coin bahis yapmak istiyorsun?");
 
-if(!amount)return;
+    if(!amount) return;
 
-amount = Number(amount);
+    amount = Number(amount);
 
-let user =
-JSON.parse(
-localStorage.getItem(
-"user_"+currentUser
-)
-);
+    let user =
+    JSON.parse(
+        localStorage.getItem(
+            "user_"+currentUser
+        )
+    );
 
-if(amount > user.coins){
-alert("Yetersiz coin");
-return;
+    if(amount > user.coins){
+        alert("Yetersiz coin");
+        return;
+    }
+
+    if(Math.random() < 0.5){
+
+        let win = amount * 2;
+
+        user.coins += win;
+
+        user.history.unshift(
+            "✅ "+team+" +" + win
+        );
+
+        alert("Kazandın!");
+
+    }else{
+
+        user.coins -= amount;
+
+        user.history.unshift(
+            "❌ "+team+" -" + amount
+        );
+
+        alert("Kaybettin!");
+    }
+
+    saveUser(user);
+    loadUser();
 }
 
-if(Math.random() < 0.5){
-
-let win = amount * 2;
-
-user.coins += win;
-
-user.history.unshift(
-"✅ "+team+" +" + win
-);
-
-alert("Kazandın!");
-
-}else{
-
-user.coins -= amount;
-
-user.history.unshift(
-"❌ "+team+" -" + amount
-);
-
-alert("Kaybettin!");
-}
-
-saveUser(user);
-
-loadUser();
-}
 async function loadMatches(){
 
+    try{
 
-try{
+        const response =
+        await fetch("/api/matches");
 
-const response = await fetch("/api/matches");
-const data = await response.json();
+        const data =
+        await response.json();
 
-let html = "";
+        let html = "";
 
-data.matches.slice(0,10).forEach(match=>{
+        data.response
+        .slice(0,20)
+        .forEach(match=>{
 
-html += `
-<div class="match">
-${match.homeTeam.name} - ${match.awayTeam.name}
+            const home =
+            match.teams.home.name;
 
-<button onclick="bet('${match.homeTeam.name}')">1</button>
+            const away =
+            match.teams.away.name;
 
-<button onclick="bet('Beraberlik')">X</button>
+            html += `
+            <div class="match">
 
-<button onclick="bet('${match.awayTeam.name}')">2</button>
+                <b>${home}</b>
+                vs
+                <b>${away}</b>
 
-</div>
-`;
+                <br><br>
 
-});
+                <button onclick="bet('${home}')">
+                1
+                </button>
 
-document.getElementById("matches").innerHTML = html;
+                <button onclick="bet('Beraberlik')">
+                X
+                </button>
 
-}catch(error){
+                <button onclick="bet('${away}')">
+                2
+                </button>
 
-document.getElementById("matches").innerHTML =
-"Maçlar yüklenemedi";
+            </div>
+            `;
+        });
 
-console.log(error);
+        document.getElementById(
+            "matches"
+        ).innerHTML = html;
 
-}
+    }catch(error){
 
+        document.getElementById(
+            "matches"
+        ).innerHTML =
+        "Maçlar yüklenemedi";
+
+        console.log(error);
+    }
 }
 
 function logout(){
 
-localStorage.removeItem(
-"currentUser"
-);
+    localStorage.removeItem(
+        "currentUser"
+    );
 
-location.reload();
+    location.reload();
 }
