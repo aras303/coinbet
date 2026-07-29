@@ -2,20 +2,27 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTheme } from '../theme/ThemeContext';
 
-export default function Logo() {
+type Props = {
+  size?: number;
+};
+
+export default function Logo({ size = 34 }: Props) {
   const theme = useTheme();
 
   return (
     <View style={styles.row}>
       <Text
-        style={[styles.text, { color: theme.colors.text, fontFamily: theme.typography.fontFamily }]}
+        style={[
+          styles.text,
+          { fontSize: size, color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+        ]}
       >
         Coin
       </Text>
       <Text
         style={[
           styles.text,
-          { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+          { fontSize: size, color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
         ]}
       >
         Bet
@@ -29,7 +36,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   text: {
-    fontSize: 34,
     fontWeight: '800',
     letterSpacing: 0.5,
   },

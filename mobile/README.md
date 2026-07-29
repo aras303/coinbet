@@ -1,8 +1,10 @@
 # CoinBet (mobile)
 
-React Native + Expo + TypeScript starter for the CoinBet mobile app.
-This is a clean infrastructure scaffold only — no match API, backend,
-auth, or design screens yet.
+React Native + Expo + TypeScript app for CoinBet. The Home screen
+fetches real fixtures through the backend proxy in `../api` — the
+mobile app never talks to API-Football directly and never holds an
+API key. No coupon system, live odds trading, or match detail screen
+yet.
 
 ## Requirements
 
@@ -19,10 +21,12 @@ npm install
 cp .env.example .env
 ```
 
-Fill in `.env` with real values. Only variables prefixed with
-`EXPO_PUBLIC_` are readable from the app — never put private/secret
-keys there, since anything in the client bundle is visible to end
-users. Real secrets belong on a backend, not in this repo.
+Fill in `.env` with real values. `EXPO_PUBLIC_API_BASE_URL` should
+point at the deployed backend from `../api` (see the root README/
+`.env.example` for the `API_FOOTBALL_KEY` that backend needs — it
+never goes in this app). Only variables prefixed with `EXPO_PUBLIC_`
+are readable from the app — never put private/secret keys there,
+since anything in the client bundle is visible to end users.
 
 ## Run
 
@@ -48,10 +52,11 @@ npm run format:check # Prettier (check only)
 src/
   screens/      # top-level app screens
   components/   # reusable UI components
-  services/     # API clients / external integrations
+  services/     # API clients (calls the backend proxy, never API-Football)
+  hooks/        # stateful data hooks (caching, request dedup)
   theme/        # colors, spacing, typography, dark theme provider
   types/        # shared TypeScript types
-  utils/        # helper functions
+  utils/        # date/match formatting helpers
   navigation/   # navigation container, stacks, route types
   config/       # environment variable access
 ```

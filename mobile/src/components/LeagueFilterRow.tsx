@@ -1,0 +1,93 @@
+import React from 'react';
+import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
+import RemoteLogo from './RemoteLogo';
+import { useTheme } from '../theme/ThemeContext';
+import type { League } from '../types/match';
+
+type Props = {
+  leagues: League[];
+  selectedLeagueId: number | 'all';
+  onSelect: (leagueId: number | 'all') => void;
+};
+
+export default function LeagueFilterRow({ leagues, selectedLeagueId, onSelect }: Props) {
+  return (
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.row}
+    >
+      <Chip label="Tümü" active={selectedLeagueId === 'all'} onPress={() => onSelect('all')} />
+      {leagues.map((league) => (
+        <Chip
+          key={league.id}
+          label={league.name}
+          logo={league.logo}
+          active={selectedLeagueId === league.id}
+          onPress={() => onSelect(league.id)}
+        />
+      ))}
+    </ScrollView>
+  );
+}
+
+type ChipProps = {
+  label: string;
+  logo?: string | null;
+  active: boolean;
+  onPress: () => void;
+};
+
+function Chip({ label, logo, active, onPress }: ChipProps) {
+  const theme = useTheme();
+
+  return (
+    <Pressable
+      onPress={onPress}
+      style={[
+        styles.chip,
+        {
+          backgroundColor: active ? theme.colors.primary : theme.colors.surface,
+          borderColor: active ? theme.colors.primary : theme.colors.border,
+          borderRadius: theme.radius.full,
+        },
+      ]}
+    >
+      {logo ? <RemoteLogo uri={logo} size={16} fallbackIcon="football-outline" /> : null}
+      <Text
+        style={[
+          styles.chipLabel,
+          {
+            color: active ? theme.colors.background : theme.colors.textSecondary,
+            fontFamily: theme.typography.fontFamily,
+          },
+        ]}
+        numberOfLines={1}
+      >
+        {label}
+      </Text>
+    </Pressable>
+  );
+}
+
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    gap: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  chip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    borderWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+  },
+  chipLabel: {
+    fontSize: 13,
+    fontWeight: '600',
+    maxWidth: 140,
+  },
+});
