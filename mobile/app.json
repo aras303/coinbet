@@ -7,7 +7,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
-    "backgroundColor": "#0D0F14",
+    "backgroundColor": "#050706",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.coinbet.app"
@@ -15,7 +15,7 @@
     "android": {
       "package": "com.coinbet.app",
       "adaptiveIcon": {
-        "backgroundColor": "#0D0F14",
+        "backgroundColor": "#050706",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
