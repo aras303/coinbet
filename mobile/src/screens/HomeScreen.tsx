@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import TopBar from '../components/TopBar';
 import SideMenuDrawer from '../components/SideMenuDrawer';
 import CalendarRow from '../components/CalendarRow';
@@ -15,9 +17,13 @@ import { useMatches } from '../hooks/useMatches';
 import { toISODate } from '../utils/date';
 import { matchSearchText } from '../utils/match';
 import type { League } from '../types/match';
+import type { RootStackParamList } from '../navigation/types';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function HomeScreen() {
   const theme = useTheme();
+  const navigation = useNavigation<NavigationProp>();
   const [selectedDate, setSelectedDate] = useState(() => new Date());
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
@@ -80,7 +86,12 @@ export default function HomeScreen() {
         <FlatList
           data={filteredMatches}
           keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => <MatchCard match={item} />}
+          renderItem={({ item }) => (
+            <MatchCard
+              match={item}
+              onPress={() => navigation.navigate('MatchDetail', { match: item })}
+            />
+          )}
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
         />

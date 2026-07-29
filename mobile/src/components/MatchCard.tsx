@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import RemoteLogo from './RemoteLogo';
 import { useTheme } from '../theme/ThemeContext';
 import type { Match } from '../types/match';
@@ -7,16 +7,18 @@ import { getStatusLabel, isFinishedMatch, isLiveMatch } from '../utils/match';
 
 type Props = {
   match: Match;
+  onPress?: () => void;
 };
 
-export default function MatchCard({ match }: Props) {
+export default function MatchCard({ match, onPress }: Props) {
   const theme = useTheme();
   const live = isLiveMatch(match);
   const finished = isFinishedMatch(match);
   const showScore = live || finished;
 
   return (
-    <View
+    <Pressable
+      onPress={onPress}
       style={[
         styles.card,
         {
@@ -107,7 +109,7 @@ export default function MatchCard({ match }: Props) {
           <OddsPill label="2" value={match.odds.away} />
         </View>
       ) : null}
-    </View>
+    </Pressable>
   );
 }
 

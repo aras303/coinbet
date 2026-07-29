@@ -2,6 +2,7 @@ import React from 'react';
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/LoginScreen';
+import MatchDetailScreen from '../screens/MatchDetailScreen';
 import MainTabs from './MainTabs';
 import { darkColors } from '../theme/colors';
 import type { RootStackParamList } from './types';
@@ -26,6 +27,7 @@ export default function RootNavigator() {
       <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Main" component={MainTabs} />
+        <Stack.Screen name="MatchDetail" component={MatchDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

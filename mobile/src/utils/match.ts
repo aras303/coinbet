@@ -25,3 +25,29 @@ export function getStatusLabel(match: Match): string {
 export function matchSearchText(match: Match): string {
   return `${match.teams.home.name} ${match.teams.away.name} ${match.league.name}`.toLowerCase();
 }
+
+const STATUS_LONG_LABELS_TR: Record<string, string> = {
+  TBD: 'Zamanı Belirsiz',
+  NS: 'Başlamadı',
+  '1H': 'İlk Yarı',
+  HT: 'Devre Arası',
+  '2H': 'İkinci Yarı',
+  ET: 'Uzatmalar',
+  BT: 'Uzatma Arası',
+  P: 'Penaltılar',
+  SUSP: 'Ertelendi',
+  INT: 'Yarıda Kesildi',
+  FT: 'Maç Sonu',
+  AET: 'Uzatmalarla Bitti',
+  PEN: 'Penaltılarla Bitti',
+  PST: 'Ertelendi',
+  CANC: 'İptal Edildi',
+  ABD: 'Yarıda Bırakıldı',
+  AWD: 'Hükmen Sonuçlandı',
+  WO: 'Hükmen Galibiyet',
+  LIVE: 'Canlı',
+};
+
+export function getStatusLongLabel(match: Match): string {
+  return STATUS_LONG_LABELS_TR[match.status.short] ?? match.status.long;
+}
