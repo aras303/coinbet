@@ -43,14 +43,80 @@ export default function WeeklyLoginScreen({ navigation }: Props) {
       <ScreenHeader title="Haftalık Giriş" onBack={() => navigation.goBack()} />
 
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Text
+        <View
           style={[
-            styles.sectionTitle,
-            { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+            styles.heroCard,
+            theme.shadow.card,
+            {
+              backgroundColor: theme.colors.surface,
+              borderColor: theme.colors.border,
+              borderRadius: theme.radius.lg,
+            },
           ]}
         >
-          7 Günlük Giriş Ödülü
-        </Text>
+          <View style={styles.heroTopRow}>
+            <View
+              style={[
+                styles.eyebrow,
+                { backgroundColor: `${theme.colors.primary}1A`, borderRadius: theme.radius.full },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.eyebrowText,
+                  { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+                ]}
+              >
+                COINBET ÖDÜL PROGRAMI
+              </Text>
+            </View>
+
+            <View
+              style={[
+                styles.weekBadge,
+                {
+                  backgroundColor: theme.colors.surfaceElevated,
+                  borderColor: theme.colors.border,
+                  borderRadius: theme.radius.full,
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.weekBadgeText,
+                  { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                ]}
+              >
+                BU HAFTA {activeDay}/7 GÜN
+              </Text>
+            </View>
+          </View>
+
+          <Text
+            style={[
+              styles.heroTitle,
+              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+            ]}
+          >
+            7 Günlük Giriş Ödülü
+          </Text>
+          <Text
+            style={[
+              styles.heroSubtitle,
+              { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+            ]}
+          >
+            Her gün giriş yap, coin ödülünü kaçırma. Ödüller gün geçtikçe artar.
+          </Text>
+          <Text
+            style={[
+              styles.heroNote,
+              { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+            ]}
+          >
+            Her pazartesi yenilenir
+          </Text>
+        </View>
 
         <ScrollView
           horizontal
@@ -130,6 +196,51 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 8,
     paddingBottom: 32,
+  },
+  heroCard: {
+    borderWidth: 1,
+    padding: 16,
+    gap: 8,
+  },
+  heroTopRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 8,
+  },
+  eyebrow: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  eyebrowText: {
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 0.6,
+  },
+  weekBadge: {
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  weekBadgeText: {
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 0.3,
+  },
+  heroTitle: {
+    fontSize: 22,
+    fontWeight: '800',
+    marginTop: 4,
+  },
+  heroSubtitle: {
+    fontSize: 13,
+    fontWeight: '500',
+    lineHeight: 18,
+  },
+  heroNote: {
+    fontSize: 11,
+    fontWeight: '600',
+    marginTop: 2,
   },
   sectionTitle: {
     fontSize: 13,
