@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { CheckCircleIcon, SoccerBallIcon, XCircleIcon } from 'phosphor-react-native';
+import { CheckCircleIcon, XCircleIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 import type { CouponLeg } from '../types/coupon';
 
@@ -34,12 +34,7 @@ export default function CouponMatchRow({ leg }: Props) {
         )}
       </View>
 
-      <SoccerBallIcon
-        size={15}
-        color={theme.colors.textMuted}
-        weight="light"
-        style={styles.ballIcon}
-      />
+      <Text style={styles.ballIcon}>⚽</Text>
 
       <View style={styles.teamsCell}>
         <View style={styles.teamRow}>
@@ -122,6 +117,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
   ballIcon: {
+    fontSize: 15,
     marginRight: 2,
   },
   teamsCell: {
