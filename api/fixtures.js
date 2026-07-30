@@ -73,6 +73,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ date, matches });
   } catch (error) {
+    console.error('fixtures handler error:', error);
     res.status(502).json({ error: 'Unable to fetch matches right now.' });
   }
 }
