@@ -47,14 +47,15 @@ export default function WeeklyDayCard({ day, coins, status }: Props) {
             fontFamily: theme.typography.fontFamily,
           },
         ]}
+        numberOfLines={1}
       >
-        {day}. GÜN
+        {day}
       </Text>
 
       <View style={[styles.badge, { backgroundColor: badgeColor }]}>
         <Ionicons
           name={claimed ? 'checkmark' : status === 'locked' ? 'lock-closed' : 'logo-bitcoin'}
-          size={18}
+          size={14}
           color={badgeIconColor}
         />
       </View>
@@ -68,16 +69,10 @@ export default function WeeklyDayCard({ day, coins, status }: Props) {
             opacity: status === 'locked' ? 0.5 : 1,
           },
         ]}
+        numberOfLines={1}
+        adjustsFontSizeToFit
       >
         {coins}
-      </Text>
-      <Text
-        style={[
-          styles.coinLabel,
-          { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
-        ]}
-      >
-        COIN
       </Text>
     </View>
   );
@@ -85,32 +80,28 @@ export default function WeeklyDayCard({ day, coins, status }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    width: 76,
+    flex: 1,
+    minWidth: 0,
     borderWidth: 1,
     alignItems: 'center',
-    paddingVertical: 12,
-    gap: 6,
+    paddingVertical: 8,
+    paddingHorizontal: 2,
+    gap: 5,
   },
   dayLabel: {
-    fontSize: 10,
+    fontSize: 9,
     fontWeight: '800',
-    letterSpacing: 0.3,
+    letterSpacing: 0.2,
   },
   badge: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
+    width: 26,
+    height: 26,
+    borderRadius: 13,
     alignItems: 'center',
     justifyContent: 'center',
   },
   coins: {
-    fontSize: 15,
+    fontSize: 11,
     fontWeight: '800',
-  },
-  coinLabel: {
-    fontSize: 9,
-    fontWeight: '700',
-    letterSpacing: 0.3,
-    marginTop: -4,
   },
 });
