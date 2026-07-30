@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import ScreenHeader from '../components/ScreenHeader';
@@ -118,24 +119,40 @@ export default function WeeklyLoginScreen({ navigation }: Props) {
           </Text>
         </View>
 
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.daysRow}
-        >
-          {WEEKLY_LOGIN_REWARDS.map((coins, index) => {
-            const day = index + 1;
-            let status: WeeklyDayStatus;
-            if (day < activeDay) {
-              status = 'claimed';
-            } else if (day > activeDay) {
-              status = 'locked';
-            } else {
-              status = claimedToday ? 'claimed' : 'available';
-            }
-            return <WeeklyDayCard key={day} day={day} coins={coins} status={status} />;
-          })}
-        </ScrollView>
+        <View style={styles.daysWrap}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.daysRow}
+          >
+            {WEEKLY_LOGIN_REWARDS.map((coins, index) => {
+              const day = index + 1;
+              let status: WeeklyDayStatus;
+              if (day < activeDay) {
+                status = 'claimed';
+              } else if (day > activeDay) {
+                status = 'locked';
+              } else {
+                status = claimedToday ? 'claimed' : 'available';
+              }
+              return <WeeklyDayCard key={day} day={day} coins={coins} status={status} />;
+            })}
+          </ScrollView>
+          <LinearGradient
+            pointerEvents="none"
+            colors={[theme.colors.background, `${theme.colors.background}00`]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.edgeFadeLeft}
+          />
+          <LinearGradient
+            pointerEvents="none"
+            colors={[`${theme.colors.background}00`, theme.colors.background]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.edgeFadeRight}
+          />
+        </View>
 
         <View style={styles.claimButtonWrap}>
           <PrimaryButton
@@ -248,10 +265,27 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 12,
   },
+  daysWrap: {
+    position: 'relative',
+  },
   daysRow: {
     flexDirection: 'row',
     gap: 10,
     paddingRight: 4,
+  },
+  edgeFadeLeft: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    width: 16,
+  },
+  edgeFadeRight: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    width: 28,
   },
   claimButtonWrap: {
     marginTop: 16,
