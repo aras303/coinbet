@@ -16,7 +16,7 @@ import EmptyState from '../components/EmptyState';
 import { useTheme } from '../theme/ThemeContext';
 import { useMatches } from '../hooks/useMatches';
 import { toISODate } from '../utils/date';
-import { matchSearchText } from '../utils/match';
+import { groupMatchesByLeague, matchSearchText } from '../utils/match';
 import type { League } from '../types/match';
 import type { RootStackParamList } from '../navigation/types';
 
@@ -59,18 +59,7 @@ export default function HomeScreen() {
     });
   }, [matches, selectedLeagueId, searchText]);
 
-  const sections = useMemo(() => {
-    const map = new Map<number, { league: League; data: typeof filteredMatches }>();
-    filteredMatches.forEach((match) => {
-      const existing = map.get(match.league.id);
-      if (existing) {
-        existing.data.push(match);
-      } else {
-        map.set(match.league.id, { league: match.league, data: [match] });
-      }
-    });
-    return Array.from(map.values());
-  }, [filteredMatches]);
+  const sections = useMemo(() => groupMatchesByLeague(filteredMatches), [filteredMatches]);
 
   return (
     <SafeAreaView

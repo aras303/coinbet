@@ -1,4 +1,4 @@
-import type { Match } from '../types/match';
+import type { League, Match } from '../types/match';
 import { formatKickoffTime } from './date';
 
 const LIVE_STATUSES = new Set(['1H', '2H', 'HT', 'ET', 'BT', 'P', 'LIVE']);
@@ -50,4 +50,22 @@ const STATUS_LONG_LABELS_TR: Record<string, string> = {
 
 export function getStatusLongLabel(match: Match): string {
   return STATUS_LONG_LABELS_TR[match.status.short] ?? match.status.long;
+}
+
+export type MatchLeagueSection = {
+  league: League;
+  data: Match[];
+};
+
+export function groupMatchesByLeague(matches: Match[]): MatchLeagueSection[] {
+  const map = new Map<number, MatchLeagueSection>();
+  matches.forEach((match) => {
+    const existing = map.get(match.league.id);
+    if (existing) {
+      existing.data.push(match);
+    } else {
+      map.set(match.league.id, { league: match.league, data: [match] });
+    }
+  });
+  return Array.from(map.values());
 }
