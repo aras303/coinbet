@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { CheckIcon, CoinsIcon, LockIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 
 export type WeeklyDayStatus = 'claimed' | 'available' | 'locked';
@@ -31,7 +31,9 @@ export default function WeeklyDayCard({ day, coins, status }: Props) {
     <View
       style={[
         styles.card,
-        active && theme.shadow.glow(theme.colors.primary),
+        active
+          ? theme.shadow.glow(theme.colors.primary)
+          : theme.shadow.ambient(theme.colors.primaryMuted),
         {
           backgroundColor: theme.colors.surface,
           borderColor: active ? theme.colors.primary : theme.colors.border,
@@ -44,7 +46,7 @@ export default function WeeklyDayCard({ day, coins, status }: Props) {
           styles.dayLabel,
           {
             color: active ? theme.colors.primary : theme.colors.textMuted,
-            fontFamily: theme.typography.fontFamily,
+            fontFamily: theme.typography.manrope.extraBold,
           },
         ]}
         numberOfLines={1}
@@ -53,11 +55,13 @@ export default function WeeklyDayCard({ day, coins, status }: Props) {
       </Text>
 
       <View style={[styles.badge, { backgroundColor: badgeColor }]}>
-        <Ionicons
-          name={claimed ? 'checkmark' : status === 'locked' ? 'lock-closed' : 'logo-bitcoin'}
-          size={14}
-          color={badgeIconColor}
-        />
+        {claimed ? (
+          <CheckIcon size={14} color={badgeIconColor} weight="bold" />
+        ) : status === 'locked' ? (
+          <LockIcon size={14} color={badgeIconColor} weight="bold" />
+        ) : (
+          <CoinsIcon size={14} color={badgeIconColor} weight="fill" />
+        )}
       </View>
 
       <Text
@@ -65,7 +69,7 @@ export default function WeeklyDayCard({ day, coins, status }: Props) {
           styles.coins,
           {
             color: theme.colors.text,
-            fontFamily: theme.typography.fontFamily,
+            fontFamily: theme.typography.manrope.extraBold,
             opacity: status === 'locked' ? 0.5 : 1,
           },
         ]}
@@ -90,7 +94,6 @@ const styles = StyleSheet.create({
   },
   dayLabel: {
     fontSize: 9,
-    fontWeight: '800',
     letterSpacing: 0.2,
   },
   badge: {
@@ -102,6 +105,5 @@ const styles = StyleSheet.create({
   },
   coins: {
     fontSize: 11,
-    fontWeight: '800',
   },
 });

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { CaretRightIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 
 type Props = {
@@ -43,7 +43,7 @@ export default function BetSlipBar({ visible, count, totalOdds }: Props) {
         <Text
           style={[
             styles.badgeText,
-            { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.primary, fontFamily: theme.typography.manrope.extraBold },
           ]}
         >
           {count}
@@ -52,7 +52,7 @@ export default function BetSlipBar({ visible, count, totalOdds }: Props) {
       <Text
         style={[
           styles.label,
-          { color: theme.colors.background, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.background, fontFamily: theme.typography.manrope.extraBold },
         ]}
       >
         Kupon
@@ -60,12 +60,12 @@ export default function BetSlipBar({ visible, count, totalOdds }: Props) {
       <Text
         style={[
           styles.odds,
-          { color: theme.colors.background, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.background, fontFamily: theme.typography.manrope.extraBold },
         ]}
       >
         {totalOdds}
       </Text>
-      <Ionicons name="chevron-forward" size={18} color={theme.colors.background} />
+      <CaretRightIcon size={18} color={theme.colors.background} weight="bold" />
     </Animated.View>
   );
 }
@@ -91,15 +91,12 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     fontSize: 13,
-    fontWeight: '800',
   },
   label: {
     flex: 1,
     fontSize: 15,
-    fontWeight: '800',
   },
   odds: {
     fontSize: 16,
-    fontWeight: '800',
   },
 });

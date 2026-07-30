@@ -19,7 +19,7 @@ export default function StatCompareRow({ label, home, away }: Props) {
         <Text
           style={[
             styles.value,
-            { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           {home}
@@ -27,7 +27,7 @@ export default function StatCompareRow({ label, home, away }: Props) {
         <Text
           style={[
             styles.label,
-            { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
           ]}
         >
           {label}
@@ -35,7 +35,7 @@ export default function StatCompareRow({ label, home, away }: Props) {
         <Text
           style={[
             styles.value,
-            { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           {away}
@@ -65,13 +65,11 @@ const styles = StyleSheet.create({
   },
   value: {
     fontSize: 14,
-    fontWeight: '700',
     minWidth: 28,
     textAlign: 'center',
   },
   label: {
     fontSize: 12,
-    fontWeight: '600',
   },
   track: {
     height: 6,

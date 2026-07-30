@@ -14,43 +14,85 @@ export default function StandingsTable({ rows }: Props) {
     <View
       style={[
         styles.card,
-        theme.shadow.card,
+        theme.shadow.ambient(theme.colors.primaryMuted),
         {
           backgroundColor: theme.colors.surface,
           borderColor: theme.colors.border,
-          borderRadius: theme.radius.md,
+          borderRadius: theme.radius.lg,
         },
       ]}
     >
       <View style={[styles.headerRow, { borderBottomColor: theme.colors.border }]}>
-        <Text style={[styles.posCell, styles.headerText, { color: theme.colors.textMuted }]}>
+        <Text
+          style={[
+            styles.posCell,
+            styles.headerText,
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
+          ]}
+        >
           #
         </Text>
         <Text
           style={[
             styles.teamCell,
             styles.headerText,
-            { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           Takım
         </Text>
-        <Text style={[styles.numCell, styles.headerText, { color: theme.colors.textMuted }]}>
+        <Text
+          style={[
+            styles.numCell,
+            styles.headerText,
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
+          ]}
+        >
           O
         </Text>
-        <Text style={[styles.numCell, styles.headerText, { color: theme.colors.textMuted }]}>
+        <Text
+          style={[
+            styles.numCell,
+            styles.headerText,
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
+          ]}
+        >
           G
         </Text>
-        <Text style={[styles.numCell, styles.headerText, { color: theme.colors.textMuted }]}>
+        <Text
+          style={[
+            styles.numCell,
+            styles.headerText,
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
+          ]}
+        >
           B
         </Text>
-        <Text style={[styles.numCell, styles.headerText, { color: theme.colors.textMuted }]}>
+        <Text
+          style={[
+            styles.numCell,
+            styles.headerText,
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
+          ]}
+        >
           M
         </Text>
-        <Text style={[styles.avCell, styles.headerText, { color: theme.colors.textMuted }]}>
+        <Text
+          style={[
+            styles.avCell,
+            styles.headerText,
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
+          ]}
+        >
           AV
         </Text>
-        <Text style={[styles.ptsCell, styles.headerText, { color: theme.colors.textMuted }]}>
+        <Text
+          style={[
+            styles.ptsCell,
+            styles.headerText,
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
+          ]}
+        >
           P
         </Text>
       </View>
@@ -68,7 +110,7 @@ export default function StandingsTable({ rows }: Props) {
             style={[
               styles.posCell,
               styles.cellText,
-              { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             {row.position}
@@ -77,8 +119,7 @@ export default function StandingsTable({ rows }: Props) {
             style={[
               styles.teamCell,
               styles.cellText,
-              styles.teamName,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
             ]}
             numberOfLines={1}
           >
@@ -88,7 +129,7 @@ export default function StandingsTable({ rows }: Props) {
             style={[
               styles.numCell,
               styles.cellText,
-              { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             {row.played}
@@ -97,7 +138,7 @@ export default function StandingsTable({ rows }: Props) {
             style={[
               styles.numCell,
               styles.cellText,
-              { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             {row.won}
@@ -106,7 +147,7 @@ export default function StandingsTable({ rows }: Props) {
             style={[
               styles.numCell,
               styles.cellText,
-              { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             {row.drawn}
@@ -115,7 +156,7 @@ export default function StandingsTable({ rows }: Props) {
             style={[
               styles.numCell,
               styles.cellText,
-              { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             {row.lost}
@@ -124,7 +165,7 @@ export default function StandingsTable({ rows }: Props) {
             style={[
               styles.avCell,
               styles.cellText,
-              { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             {row.goalsFor - row.goalsAgainst > 0 ? '+' : ''}
@@ -134,7 +175,7 @@ export default function StandingsTable({ rows }: Props) {
             style={[
               styles.ptsCell,
               styles.cellText,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
             ]}
           >
             {row.points}
@@ -168,11 +209,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 11,
-    fontWeight: '700',
   },
   cellText: {
     fontSize: 12,
-    fontWeight: '600',
   },
   posCell: {
     width: 20,
@@ -181,9 +220,6 @@ const styles = StyleSheet.create({
   teamCell: {
     flex: 1,
     paddingLeft: 6,
-  },
-  teamName: {
-    fontWeight: '700',
   },
   numCell: {
     width: 20,
@@ -196,6 +232,5 @@ const styles = StyleSheet.create({
   ptsCell: {
     width: 26,
     textAlign: 'center',
-    fontWeight: '800',
   },
 });

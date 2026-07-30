@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import AmbientBackground from '../components/AmbientBackground';
 import MatchDetailHeader from '../components/MatchDetailHeader';
 import MatchDetailTabs, { type MatchDetailTabKey } from '../components/MatchDetailTabs';
 import OddsCategoryTabs from '../components/OddsCategoryTabs';
@@ -71,6 +72,7 @@ export default function MatchDetailScreen({ route, navigation }: Props) {
       style={[styles.root, { backgroundColor: theme.colors.background }]}
       edges={['top', 'left', 'right', 'bottom']}
     >
+      <AmbientBackground />
       <MatchDetailHeader match={match} onBack={() => navigation.goBack()} />
       <MatchDetailTabs active={activeTab} onChange={setActiveTab} />
 
@@ -113,7 +115,7 @@ export default function MatchDetailScreen({ route, navigation }: Props) {
             <Text
               style={[
                 styles.statsTeamName,
-                { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.bold },
               ]}
               numberOfLines={1}
             >
@@ -124,7 +126,7 @@ export default function MatchDetailScreen({ route, navigation }: Props) {
                 styles.statsTeamName,
                 {
                   color: theme.colors.textSecondary,
-                  fontFamily: theme.typography.fontFamily,
+                  fontFamily: theme.typography.manrope.bold,
                   textAlign: 'right',
                 },
               ]}
@@ -195,6 +197,5 @@ const styles = StyleSheet.create({
   statsTeamName: {
     flex: 1,
     fontSize: 12,
-    fontWeight: '700',
   },
 });

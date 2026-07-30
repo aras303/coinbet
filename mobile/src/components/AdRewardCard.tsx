@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { CheckCircleIcon, PlayCircleIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 
 export type AdRewardStatus = 'locked' | 'ready' | 'playing' | 'claimed';
@@ -27,25 +27,25 @@ export default function AdRewardCard({ title, coins, status, onWatch }: Props) {
     <View
       style={[
         styles.card,
-        theme.shadow.card,
+        theme.shadow.ambient(theme.colors.primaryMuted),
         {
           backgroundColor: theme.colors.surface,
           borderColor: theme.colors.border,
-          borderRadius: theme.radius.md,
+          borderRadius: theme.radius.lg,
         },
       ]}
     >
-      <Ionicons
-        name={status === 'claimed' ? 'checkmark-circle' : 'play-circle-outline'}
-        size={28}
-        color={status === 'claimed' ? theme.colors.primary : theme.colors.textSecondary}
-      />
+      {status === 'claimed' ? (
+        <CheckCircleIcon size={28} color={theme.colors.primary} weight="fill" />
+      ) : (
+        <PlayCircleIcon size={28} color={theme.colors.textSecondary} weight="regular" />
+      )}
 
       <View style={styles.textWrap}>
         <Text
           style={[
             styles.title,
-            { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
           ]}
           numberOfLines={1}
         >
@@ -54,7 +54,7 @@ export default function AdRewardCard({ title, coins, status, onWatch }: Props) {
         <Text
           style={[
             styles.subtitle,
-            { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.primary, fontFamily: theme.typography.manrope.extraBold },
           ]}
         >
           +{coins} Coin
@@ -77,7 +77,7 @@ export default function AdRewardCard({ title, coins, status, onWatch }: Props) {
             styles.buttonText,
             {
               color: status === 'ready' ? theme.colors.background : theme.colors.textMuted,
-              fontFamily: theme.typography.fontFamily,
+              fontFamily: theme.typography.manrope.extraBold,
             },
           ]}
         >
@@ -102,12 +102,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 14,
-    fontWeight: '700',
     marginBottom: 2,
   },
   subtitle: {
     fontSize: 13,
-    fontWeight: '800',
   },
   button: {
     paddingHorizontal: 16,
@@ -115,6 +113,5 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 12,
-    fontWeight: '800',
   },
 });

@@ -3,6 +3,7 @@ import { SectionList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import AmbientBackground from '../components/AmbientBackground';
 import LeagueFilterRow from '../components/LeagueFilterRow';
 import LeagueSectionHeader from '../components/LeagueSectionHeader';
 import MatchCard from '../components/MatchCard';
@@ -47,6 +48,7 @@ export default function LiveScreen() {
       style={[styles.root, { backgroundColor: theme.colors.background }]}
       edges={['top', 'left', 'right']}
     >
+      <AmbientBackground />
       {!loading && !error && liveMatches.length > 0 ? (
         <LeagueFilterRow
           leagues={leagues}

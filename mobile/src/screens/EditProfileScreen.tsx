@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { CameraIcon, UserIcon } from 'phosphor-react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import AmbientBackground from '../components/AmbientBackground';
 import ScreenHeader from '../components/ScreenHeader';
 import TextField from '../components/TextField';
 import PrimaryButton from '../components/PrimaryButton';
@@ -27,15 +28,16 @@ export default function EditProfileScreen({ navigation }: Props) {
       style={[styles.root, { backgroundColor: theme.colors.background }]}
       edges={['top', 'left', 'right', 'bottom']}
     >
+      <AmbientBackground />
       <ScreenHeader title="Profili Düzenle" onBack={() => navigation.goBack()} />
 
       <View style={styles.content}>
         <View style={styles.avatarWrap}>
           <View style={[styles.avatar, { backgroundColor: theme.colors.surfaceElevated }]}>
-            <Ionicons name="person" size={40} color={theme.colors.textMuted} />
+            <UserIcon size={38} color={theme.colors.textMuted} weight="fill" />
           </View>
           <View style={[styles.avatarBadge, { backgroundColor: theme.colors.primary }]}>
-            <Ionicons name="camera" size={14} color={theme.colors.background} />
+            <CameraIcon size={14} color={theme.colors.background} weight="fill" />
           </View>
         </View>
 

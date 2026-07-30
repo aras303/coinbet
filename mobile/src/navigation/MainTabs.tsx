@@ -1,7 +1,14 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import {
+  type Icon,
+  BroadcastIcon,
+  ChartBarIcon,
+  HouseIcon,
+  ReceiptIcon,
+  UserIcon,
+} from 'phosphor-react-native';
 import HomeScreen from '../screens/HomeScreen';
 import LiveScreen from '../screens/LiveScreen';
 import ResultsScreen from '../screens/ResultsScreen';
@@ -14,15 +21,12 @@ import type { RootTabParamList } from './types';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
-const tabIcons: Record<
-  keyof RootTabParamList,
-  { active: keyof typeof Ionicons.glyphMap; inactive: keyof typeof Ionicons.glyphMap }
-> = {
-  Home: { active: 'home', inactive: 'home-outline' },
-  Live: { active: 'radio', inactive: 'radio-outline' },
-  Results: { active: 'stats-chart', inactive: 'stats-chart-outline' },
-  MyCoupons: { active: 'receipt', inactive: 'receipt-outline' },
-  Profile: { active: 'person', inactive: 'person-outline' },
+const tabIcons: Record<keyof RootTabParamList, Icon> = {
+  Home: HouseIcon,
+  Live: BroadcastIcon,
+  Results: ChartBarIcon,
+  MyCoupons: ReceiptIcon,
+  Profile: UserIcon,
 };
 
 const tabLabels: Record<keyof RootTabParamList, string> = {
@@ -47,14 +51,12 @@ export default function MainTabs() {
           ...shadow.raised,
         },
         tabBarLabelStyle: {
-          fontFamily: typography.fontFamily,
+          fontFamily: typography.manrope.bold,
           fontSize: 11,
         },
         tabBarIcon: ({ focused, color, size }) => {
-          const icon = tabIcons[route.name as keyof RootTabParamList];
-          return (
-            <Ionicons name={focused ? icon.active : icon.inactive} size={size} color={color} />
-          );
+          const TabIcon = tabIcons[route.name as keyof RootTabParamList];
+          return <TabIcon size={size} color={color} weight={focused ? 'fill' : 'regular'} />;
         },
       })}
     >

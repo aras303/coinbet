@@ -19,7 +19,7 @@ export default function PrimaryButton({ label, onPress, disabled }: Props) {
         !disabled && theme.shadow.glow(theme.colors.primary),
         {
           backgroundColor: disabled ? theme.colors.surfaceElevated : theme.colors.primary,
-          borderRadius: theme.radius.md,
+          borderRadius: theme.radius.full,
           opacity: pressed && !disabled ? 0.85 : 1,
         },
       ]}
@@ -29,7 +29,7 @@ export default function PrimaryButton({ label, onPress, disabled }: Props) {
           styles.label,
           {
             color: disabled ? theme.colors.textMuted : theme.colors.background,
-            fontFamily: theme.typography.fontFamily,
+            fontFamily: theme.typography.manrope.extraBold,
           },
         ]}
       >
@@ -48,6 +48,5 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    fontWeight: '700',
   },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { CheckCircleIcon, SoccerBallIcon, XCircleIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 import type { CouponLeg } from '../types/coupon';
 
@@ -16,16 +16,16 @@ export default function CouponMatchRow({ leg }: Props) {
     <View style={[styles.row, { borderBottomColor: theme.colors.border }]}>
       <View style={styles.statusCell}>
         {leg.outcome === 'won' ? (
-          <Ionicons name="checkmark-circle" size={20} color={theme.colors.success} />
+          <CheckCircleIcon size={20} color={theme.colors.success} weight="fill" />
         ) : leg.outcome === 'lost' ? (
-          <Ionicons name="close-circle" size={20} color={theme.colors.danger} />
+          <XCircleIcon size={20} color={theme.colors.danger} weight="fill" />
         ) : (
           <Text
             style={[
               styles.statusLabel,
               {
                 color: leg.isLive ? theme.colors.danger : theme.colors.textMuted,
-                fontFamily: theme.typography.fontFamily,
+                fontFamily: theme.typography.manrope.bold,
               },
             ]}
           >
@@ -34,10 +34,10 @@ export default function CouponMatchRow({ leg }: Props) {
         )}
       </View>
 
-      <Ionicons
-        name="football-outline"
+      <SoccerBallIcon
         size={15}
         color={theme.colors.textMuted}
+        weight="light"
         style={styles.ballIcon}
       />
 
@@ -46,7 +46,7 @@ export default function CouponMatchRow({ leg }: Props) {
           <Text
             style={[
               styles.teamName,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.semiBold },
             ]}
             numberOfLines={1}
           >
@@ -56,7 +56,7 @@ export default function CouponMatchRow({ leg }: Props) {
             <Text
               style={[
                 styles.score,
-                { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
               ]}
             >
               {leg.homeGoals}
@@ -67,7 +67,7 @@ export default function CouponMatchRow({ leg }: Props) {
           <Text
             style={[
               styles.teamName,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.semiBold },
             ]}
             numberOfLines={1}
           >
@@ -77,7 +77,7 @@ export default function CouponMatchRow({ leg }: Props) {
             <Text
               style={[
                 styles.score,
-                { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
               ]}
             >
               {leg.awayGoals}
@@ -89,7 +89,7 @@ export default function CouponMatchRow({ leg }: Props) {
       <Text
         style={[
           styles.pick,
-          { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.bold },
         ]}
       >
         {leg.pick}
@@ -97,7 +97,7 @@ export default function CouponMatchRow({ leg }: Props) {
       <Text
         style={[
           styles.odd,
-          { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.primary, fontFamily: theme.typography.manrope.extraBold },
         ]}
       >
         {leg.odd}
@@ -120,7 +120,6 @@ const styles = StyleSheet.create({
   },
   statusLabel: {
     fontSize: 11,
-    fontWeight: '700',
   },
   ballIcon: {
     marginRight: 2,
@@ -137,23 +136,19 @@ const styles = StyleSheet.create({
   teamName: {
     flex: 1,
     fontSize: 12.5,
-    fontWeight: '600',
   },
   score: {
     fontSize: 12.5,
-    fontWeight: '800',
     marginLeft: 6,
   },
   pick: {
     width: 22,
     textAlign: 'center',
     fontSize: 13,
-    fontWeight: '700',
   },
   odd: {
     width: 44,
     textAlign: 'right',
     fontSize: 13,
-    fontWeight: '800',
   },
 });

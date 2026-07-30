@@ -30,7 +30,7 @@ export default function MatchDetailTabs({ active, onChange }: Props) {
                 styles.label,
                 {
                   color: isActive ? theme.colors.primary : theme.colors.textMuted,
-                  fontFamily: theme.typography.fontFamily,
+                  fontFamily: theme.typography.manrope.bold,
                 },
               ]}
               numberOfLines={1}
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 13,
-    fontWeight: '700',
   },
   indicator: {
     marginTop: 10,

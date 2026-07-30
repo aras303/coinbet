@@ -47,7 +47,7 @@ export default function OddsCategoryTabs({ active, onChange }: Props) {
                 styles.label,
                 {
                   color: isActive ? theme.colors.background : theme.colors.textSecondary,
-                  fontFamily: theme.typography.fontFamily,
+                  fontFamily: theme.typography.manrope.semiBold,
                 },
               ]}
             >
@@ -74,6 +74,5 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 12,
-    fontWeight: '600',
   },
 });

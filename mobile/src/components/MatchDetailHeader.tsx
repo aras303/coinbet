@@ -1,7 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { SoccerBallIcon } from 'phosphor-react-native';
+import { CaretLeftIcon, SoccerBallIcon } from 'phosphor-react-native';
 import RemoteLogo from './RemoteLogo';
 import { useTheme } from '../theme/ThemeContext';
 import type { Match } from '../types/match';
@@ -19,10 +18,16 @@ export default function MatchDetailHeader({ match, onBack }: Props) {
   const showScore = live || finished;
 
   return (
-    <View style={[styles.wrapper, theme.shadow.card, { backgroundColor: theme.colors.surface }]}>
+    <View
+      style={[
+        styles.wrapper,
+        theme.shadow.ambient(theme.colors.primaryMuted),
+        { backgroundColor: theme.colors.surface },
+      ]}
+    >
       <View style={styles.topRow}>
         <Pressable onPress={onBack} hitSlop={12} style={styles.backButton}>
-          <Ionicons name="chevron-back" size={24} color={theme.colors.text} />
+          <CaretLeftIcon size={22} color={theme.colors.text} weight="bold" />
         </Pressable>
 
         <View style={styles.leagueRow}>
@@ -30,7 +35,7 @@ export default function MatchDetailHeader({ match, onBack }: Props) {
           <Text
             style={[
               styles.leagueName,
-              { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
             ]}
             numberOfLines={1}
           >
@@ -45,7 +50,7 @@ export default function MatchDetailHeader({ match, onBack }: Props) {
           <Text
             style={[
               styles.teamName,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
             ]}
             numberOfLines={2}
           >
@@ -58,7 +63,7 @@ export default function MatchDetailHeader({ match, onBack }: Props) {
             <Text
               style={[
                 styles.score,
-                { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
               ]}
             >
               {match.goals.home ?? 0} - {match.goals.away ?? 0}
@@ -67,7 +72,7 @@ export default function MatchDetailHeader({ match, onBack }: Props) {
             <Text
               style={[
                 styles.time,
-                { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
               ]}
             >
               {getStatusLabel(match)}
@@ -86,7 +91,7 @@ export default function MatchDetailHeader({ match, onBack }: Props) {
                 styles.statusText,
                 {
                   color: live ? theme.colors.primary : theme.colors.textMuted,
-                  fontFamily: theme.typography.fontFamily,
+                  fontFamily: theme.typography.manrope.bold,
                 },
               ]}
             >
@@ -100,7 +105,7 @@ export default function MatchDetailHeader({ match, onBack }: Props) {
           <Text
             style={[
               styles.teamName,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
             ]}
             numberOfLines={2}
           >
@@ -135,7 +140,6 @@ const styles = StyleSheet.create({
   },
   leagueName: {
     fontSize: 13,
-    fontWeight: '600',
   },
   teamsRow: {
     flexDirection: 'row',
@@ -151,7 +155,6 @@ const styles = StyleSheet.create({
   },
   teamName: {
     fontSize: 13,
-    fontWeight: '700',
     textAlign: 'center',
   },
   centerColumn: {
@@ -162,11 +165,9 @@ const styles = StyleSheet.create({
   },
   score: {
     fontSize: 26,
-    fontWeight: '800',
   },
   time: {
     fontSize: 20,
-    fontWeight: '800',
   },
   statusPill: {
     paddingHorizontal: 10,
@@ -175,6 +176,5 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontSize: 11,
-    fontWeight: '700',
   },
 });

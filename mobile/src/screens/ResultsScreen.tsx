@@ -3,6 +3,7 @@ import { SectionList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import AmbientBackground from '../components/AmbientBackground';
 import CalendarRow from '../components/CalendarRow';
 import DatePickerModal from '../components/DatePickerModal';
 import LeagueFilterRow from '../components/LeagueFilterRow';
@@ -57,6 +58,7 @@ export default function ResultsScreen() {
       style={[styles.root, { backgroundColor: theme.colors.background }]}
       edges={['top', 'left', 'right']}
     >
+      <AmbientBackground />
       <CalendarRow date={selectedDate} onPress={() => setDatePickerVisible(true)} />
 
       {!loading && !error && finishedMatches.length > 0 ? (

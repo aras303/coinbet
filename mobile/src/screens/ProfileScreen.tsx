@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { CoinsIcon, PencilSimpleIcon, UserIcon } from 'phosphor-react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import AmbientBackground from '../components/AmbientBackground';
 import InfoRow from '../components/InfoRow';
 import WinRateDonutChart from '../components/WinRateDonutChart';
 import { useTheme } from '../theme/ThemeContext';
@@ -28,27 +29,28 @@ export default function ProfileScreen() {
       style={[styles.root, { backgroundColor: theme.colors.background }]}
       edges={['top', 'left', 'right']}
     >
+      <AmbientBackground />
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.profileRow}>
           <View style={[styles.avatar, { backgroundColor: theme.colors.surfaceElevated }]}>
-            <Ionicons name="person" size={32} color={theme.colors.textMuted} />
+            <UserIcon size={30} color={theme.colors.textMuted} weight="fill" />
           </View>
           <View style={styles.profileText}>
             <Text
               style={[
                 styles.username,
-                { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
               ]}
               numberOfLines={1}
             >
               {username}
             </Text>
             <View style={styles.balanceRow}>
-              <Ionicons name="cash-outline" size={14} color={theme.colors.primary} />
+              <CoinsIcon size={14} color={theme.colors.primary} weight="duotone" />
               <Text
                 style={[
                   styles.balance,
-                  { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+                  { color: theme.colors.primary, fontFamily: theme.typography.manrope.extraBold },
                 ]}
               >
                 {stats.coinBalance}
@@ -66,11 +68,11 @@ export default function ProfileScreen() {
               },
             ]}
           >
-            <Ionicons name="pencil-outline" size={14} color={theme.colors.textSecondary} />
+            <PencilSimpleIcon size={14} color={theme.colors.textSecondary} weight="bold" />
             <Text
               style={[
                 styles.editButtonText,
-                { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.bold },
               ]}
             >
               Düzenle
@@ -81,11 +83,11 @@ export default function ProfileScreen() {
         <View
           style={[
             styles.statsRow,
-            theme.shadow.card,
+            theme.shadow.ambient(theme.colors.primaryMuted),
             {
               backgroundColor: theme.colors.surface,
               borderColor: theme.colors.border,
-              borderRadius: theme.radius.md,
+              borderRadius: theme.radius.lg,
             },
           ]}
         >
@@ -93,7 +95,7 @@ export default function ProfileScreen() {
             <Text
               style={[
                 styles.statValue,
-                { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.primary, fontFamily: theme.typography.manrope.extraBold },
               ]}
             >
               {stats.couponCount}
@@ -101,7 +103,10 @@ export default function ProfileScreen() {
             <Text
               style={[
                 styles.statLabel,
-                { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+                {
+                  color: theme.colors.textSecondary,
+                  fontFamily: theme.typography.manrope.semiBold,
+                },
               ]}
             >
               Kuponlarım
@@ -112,7 +117,7 @@ export default function ProfileScreen() {
             <Text
               style={[
                 styles.statValue,
-                { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
               ]}
             >
               {stats.followers}
@@ -120,7 +125,10 @@ export default function ProfileScreen() {
             <Text
               style={[
                 styles.statLabel,
-                { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+                {
+                  color: theme.colors.textSecondary,
+                  fontFamily: theme.typography.manrope.semiBold,
+                },
               ]}
             >
               Takipçiler
@@ -131,7 +139,7 @@ export default function ProfileScreen() {
             <Text
               style={[
                 styles.statValue,
-                { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
               ]}
             >
               {stats.following}
@@ -139,7 +147,10 @@ export default function ProfileScreen() {
             <Text
               style={[
                 styles.statLabel,
-                { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+                {
+                  color: theme.colors.textSecondary,
+                  fontFamily: theme.typography.manrope.semiBold,
+                },
               ]}
             >
               Takip Edilen
@@ -150,7 +161,7 @@ export default function ProfileScreen() {
         <Text
           style={[
             styles.sectionTitle,
-            { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           Dünya Sıralaması
@@ -158,11 +169,11 @@ export default function ProfileScreen() {
         <View
           style={[
             styles.card,
-            theme.shadow.card,
+            theme.shadow.ambient(theme.colors.primaryMuted),
             {
               backgroundColor: theme.colors.surface,
               borderColor: theme.colors.border,
-              borderRadius: theme.radius.md,
+              borderRadius: theme.radius.lg,
             },
           ]}
         >
@@ -174,7 +185,7 @@ export default function ProfileScreen() {
         <Text
           style={[
             styles.sectionTitle,
-            { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           Kupon Performansı
@@ -183,11 +194,11 @@ export default function ProfileScreen() {
           style={[
             styles.card,
             styles.performanceCard,
-            theme.shadow.card,
+            theme.shadow.ambient(theme.colors.primaryMuted),
             {
               backgroundColor: theme.colors.surface,
               borderColor: theme.colors.border,
-              borderRadius: theme.radius.md,
+              borderRadius: theme.radius.lg,
             },
           ]}
         >
@@ -197,7 +208,7 @@ export default function ProfileScreen() {
               <Text
                 style={[
                   styles.performanceValue,
-                  { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+                  { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.extraBold },
                 ]}
               >
                 {stats.openCoupons}
@@ -205,7 +216,10 @@ export default function ProfileScreen() {
               <Text
                 style={[
                   styles.performanceLabel,
-                  { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+                  {
+                    color: theme.colors.textSecondary,
+                    fontFamily: theme.typography.manrope.semiBold,
+                  },
                 ]}
               >
                 Açık Kuponlar
@@ -215,7 +229,7 @@ export default function ProfileScreen() {
               <Text
                 style={[
                   styles.performanceValue,
-                  { color: theme.colors.success, fontFamily: theme.typography.fontFamily },
+                  { color: theme.colors.success, fontFamily: theme.typography.manrope.extraBold },
                 ]}
               >
                 {stats.wonCoupons}
@@ -223,7 +237,10 @@ export default function ProfileScreen() {
               <Text
                 style={[
                   styles.performanceLabel,
-                  { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+                  {
+                    color: theme.colors.textSecondary,
+                    fontFamily: theme.typography.manrope.semiBold,
+                  },
                 ]}
               >
                 Tutan Kuponlar
@@ -233,7 +250,7 @@ export default function ProfileScreen() {
               <Text
                 style={[
                   styles.performanceValue,
-                  { color: theme.colors.danger, fontFamily: theme.typography.fontFamily },
+                  { color: theme.colors.danger, fontFamily: theme.typography.manrope.extraBold },
                 ]}
               >
                 {stats.lostCoupons}
@@ -241,7 +258,10 @@ export default function ProfileScreen() {
               <Text
                 style={[
                   styles.performanceLabel,
-                  { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+                  {
+                    color: theme.colors.textSecondary,
+                    fontFamily: theme.typography.manrope.semiBold,
+                  },
                 ]}
               >
                 Kaybeden Kuponlar
@@ -253,7 +273,7 @@ export default function ProfileScreen() {
         <Text
           style={[
             styles.sectionTitle,
-            { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           ROI
@@ -261,11 +281,11 @@ export default function ProfileScreen() {
         <View
           style={[
             styles.card,
-            theme.shadow.card,
+            theme.shadow.ambient(theme.colors.primaryMuted),
             {
               backgroundColor: theme.colors.surface,
               borderColor: theme.colors.border,
-              borderRadius: theme.radius.md,
+              borderRadius: theme.radius.lg,
             },
           ]}
         >
@@ -317,7 +337,6 @@ const styles = StyleSheet.create({
   },
   username: {
     fontSize: 20,
-    fontWeight: '800',
     marginBottom: 4,
   },
   balanceRow: {
@@ -327,7 +346,6 @@ const styles = StyleSheet.create({
   },
   balance: {
     fontSize: 14,
-    fontWeight: '800',
   },
   editButton: {
     flexDirection: 'row',
@@ -339,7 +357,6 @@ const styles = StyleSheet.create({
   },
   editButtonText: {
     fontSize: 12,
-    fontWeight: '700',
   },
   statsRow: {
     flexDirection: 'row',
@@ -359,15 +376,12 @@ const styles = StyleSheet.create({
   },
   statValue: {
     fontSize: 18,
-    fontWeight: '800',
   },
   statLabel: {
     fontSize: 11,
-    fontWeight: '600',
   },
   sectionTitle: {
     fontSize: 13,
-    fontWeight: '700',
     marginTop: 20,
     marginBottom: 10,
   },
@@ -392,11 +406,9 @@ const styles = StyleSheet.create({
   },
   performanceValue: {
     fontSize: 16,
-    fontWeight: '800',
     minWidth: 24,
   },
   performanceLabel: {
     fontSize: 12,
-    fontWeight: '600',
   },
 });

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { PlayCircleIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 
 const AD_DURATION_SECONDS = 3;
@@ -49,12 +49,12 @@ export default function AdPlayingModal({ visible, onComplete }: Props) {
           ]}
         >
           <View style={[styles.videoBox, { backgroundColor: theme.colors.backgroundElevated }]}>
-            <Ionicons name="play-circle" size={48} color={theme.colors.primary} />
+            <PlayCircleIcon size={48} color={theme.colors.primary} weight="fill" />
           </View>
           <Text
             style={[
               styles.label,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
             ]}
           >
             Reklam Oynatılıyor
@@ -62,7 +62,7 @@ export default function AdPlayingModal({ visible, onComplete }: Props) {
           <Text
             style={[
               styles.countdown,
-              { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.primary, fontFamily: theme.typography.manrope.extraBold },
             ]}
           >
             {secondsLeft > 0 ? secondsLeft : '✓'}
@@ -97,11 +97,9 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: '700',
     marginBottom: 8,
   },
   countdown: {
     fontSize: 28,
-    fontWeight: '800',
   },
 });

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { EyeIcon, EyeSlashIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 
 type Props = TextInputProps & {
@@ -17,7 +17,7 @@ export default function TextField({ label, secureToggle, secureTextEntry, style,
       <Text
         style={[
           styles.label,
-          { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
         ]}
       >
         {label}
@@ -35,7 +35,7 @@ export default function TextField({ label, secureToggle, secureTextEntry, style,
         <TextInput
           style={[
             styles.input,
-            { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.text, fontFamily: theme.typography.manrope.medium },
             style,
           ]}
           placeholderTextColor={theme.colors.textMuted}
@@ -46,11 +46,11 @@ export default function TextField({ label, secureToggle, secureTextEntry, style,
         />
         {secureToggle ? (
           <Pressable onPress={() => setHidden((prev) => !prev)} hitSlop={12}>
-            <Ionicons
-              name={hidden ? 'eye-outline' : 'eye-off-outline'}
-              size={20}
-              color={theme.colors.textMuted}
-            />
+            {hidden ? (
+              <EyeIcon size={20} color={theme.colors.textMuted} weight="regular" />
+            ) : (
+              <EyeSlashIcon size={20} color={theme.colors.textMuted} weight="regular" />
+            )}
           </Pressable>
         ) : null}
       </View>
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 13,
-    fontWeight: '600',
     marginBottom: 6,
   },
   inputRow: {

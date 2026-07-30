@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { CaretLeftIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 
 type Props = {
@@ -12,14 +12,20 @@ export default function ScreenHeader({ title, onBack }: Props) {
   const theme = useTheme();
 
   return (
-    <View style={[styles.row, theme.shadow.card, { backgroundColor: theme.colors.surface }]}>
+    <View
+      style={[
+        styles.row,
+        theme.shadow.ambient(theme.colors.primaryMuted),
+        { backgroundColor: theme.colors.surface },
+      ]}
+    >
       <Pressable onPress={onBack} hitSlop={12} style={styles.backButton}>
-        <Ionicons name="chevron-back" size={24} color={theme.colors.text} />
+        <CaretLeftIcon size={22} color={theme.colors.text} weight="bold" />
       </Pressable>
       <Text
         style={[
           styles.title,
-          { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
         ]}
         numberOfLines={1}
       >
@@ -43,7 +49,6 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     fontSize: 16,
-    fontWeight: '800',
     textAlign: 'center',
   },
   spacer: {

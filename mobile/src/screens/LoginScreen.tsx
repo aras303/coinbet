@@ -66,7 +66,10 @@ export default function LoginScreen() {
                 <Text
                   style={[
                     styles.signupText,
-                    { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+                    {
+                      color: theme.colors.textSecondary,
+                      fontFamily: theme.typography.manrope.medium,
+                    },
                   ]}
                 >
                   Hesabın yok mu?{' '}

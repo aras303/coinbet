@@ -18,7 +18,7 @@ export default function TextLink({ label, onPress, muted }: Props) {
           styles.text,
           {
             color: muted ? theme.colors.textSecondary : theme.colors.primary,
-            fontFamily: theme.typography.fontFamily,
+            fontFamily: theme.typography.manrope.semiBold,
           },
         ]}
       >
@@ -31,6 +31,5 @@ export default function TextLink({ label, onPress, muted }: Props) {
 const styles = StyleSheet.create({
   text: {
     fontSize: 14,
-    fontWeight: '600',
   },
 });

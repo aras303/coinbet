@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AmbientBackground from '../components/AmbientBackground';
 import CouponCard from '../components/CouponCard';
 import { useTheme } from '../theme/ThemeContext';
 import { getMockCoupons } from '../utils/mockCoupons';
@@ -14,6 +15,7 @@ export default function MyCouponsScreen() {
       style={[styles.root, { backgroundColor: theme.colors.background }]}
       edges={['top', 'left', 'right']}
     >
+      <AmbientBackground />
       <FlatList
         data={coupons}
         keyExtractor={(item) => item.id}

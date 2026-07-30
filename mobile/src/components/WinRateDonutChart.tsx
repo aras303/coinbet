@@ -44,7 +44,7 @@ export default function WinRateDonutChart({ winRate, size = 128, strokeWidth = 1
         <Text
           style={[
             styles.percent,
-            { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
           ]}
         >
           {winRate.toFixed(1)}%
@@ -66,6 +66,5 @@ const styles = StyleSheet.create({
   },
   percent: {
     fontSize: 18,
-    fontWeight: '800',
   },
 });

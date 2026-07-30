@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { ShareNetworkIcon, ThumbsUpIcon, UserIcon } from 'phosphor-react-native';
 import CouponMatchRow from './CouponMatchRow';
 import { useTheme } from '../theme/ThemeContext';
 import type { Coupon, CouponStatus } from '../types/coupon';
@@ -30,23 +30,23 @@ export default function CouponCard({ coupon }: Props) {
     <View
       style={[
         styles.card,
-        theme.shadow.card,
+        theme.shadow.ambient(theme.colors.primaryMuted),
         {
           backgroundColor: theme.colors.surface,
           borderColor: theme.colors.border,
-          borderRadius: theme.radius.md,
+          borderRadius: theme.radius.lg,
         },
       ]}
     >
       <View style={styles.header}>
         <View style={[styles.avatar, { backgroundColor: theme.colors.surfaceElevated }]}>
-          <Ionicons name="person" size={18} color={theme.colors.textMuted} />
+          <UserIcon size={18} color={theme.colors.textMuted} weight="fill" />
         </View>
         <View style={styles.headerText}>
           <Text
             style={[
               styles.username,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
             ]}
             numberOfLines={1}
           >
@@ -55,7 +55,7 @@ export default function CouponCard({ coupon }: Props) {
           <Text
             style={[
               styles.date,
-              { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.semiBold },
             ]}
             numberOfLines={1}
           >
@@ -71,7 +71,7 @@ export default function CouponCard({ coupon }: Props) {
           <Text
             style={[
               styles.statusBadgeText,
-              { color: statusColor, fontFamily: theme.typography.fontFamily },
+              { color: statusColor, fontFamily: theme.typography.manrope.extraBold },
             ]}
           >
             {STATUS_LABELS[coupon.status]}
@@ -84,7 +84,7 @@ export default function CouponCard({ coupon }: Props) {
           style={[
             styles.tableHeaderLabel,
             styles.tableHeaderMatches,
-            { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           MAÇLAR
@@ -93,7 +93,7 @@ export default function CouponCard({ coupon }: Props) {
           style={[
             styles.tableHeaderLabel,
             styles.tableHeaderPick,
-            { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           SEÇİM
@@ -102,7 +102,7 @@ export default function CouponCard({ coupon }: Props) {
           style={[
             styles.tableHeaderLabel,
             styles.tableHeaderOdd,
-            { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           ORAN
@@ -118,7 +118,7 @@ export default function CouponCard({ coupon }: Props) {
           <Text
             style={[
               styles.footerLabel,
-              { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             Toplam Oran
@@ -126,7 +126,7 @@ export default function CouponCard({ coupon }: Props) {
           <Text
             style={[
               styles.footerValue,
-              { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.primary, fontFamily: theme.typography.manrope.extraBold },
             ]}
           >
             {coupon.totalOdds}
@@ -136,7 +136,7 @@ export default function CouponCard({ coupon }: Props) {
           <Text
             style={[
               styles.footerLabel,
-              { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             Kupon Değeri
@@ -144,7 +144,7 @@ export default function CouponCard({ coupon }: Props) {
           <Text
             style={[
               styles.footerValue,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
             ]}
           >
             {coupon.stake}
@@ -154,7 +154,7 @@ export default function CouponCard({ coupon }: Props) {
           <Text
             style={[
               styles.footerLabel,
-              { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             Muhtemel Kazanç
@@ -162,7 +162,7 @@ export default function CouponCard({ coupon }: Props) {
           <Text
             style={[
               styles.footerValue,
-              { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.primary, fontFamily: theme.typography.manrope.extraBold },
             ]}
           >
             {coupon.potentialPayout}
@@ -172,24 +172,24 @@ export default function CouponCard({ coupon }: Props) {
 
       <View style={[styles.socialRow, { borderTopColor: theme.colors.border }]}>
         <Pressable style={styles.likeButton} onPress={() => setLiked((prev) => !prev)}>
-          <Ionicons
-            name={liked ? 'thumbs-up' : 'thumbs-up-outline'}
+          <ThumbsUpIcon
             size={17}
             color={liked ? theme.colors.primary : theme.colors.textMuted}
+            weight={liked ? 'fill' : 'regular'}
           />
           <Text
             style={[
               styles.likeCount,
               {
                 color: liked ? theme.colors.primary : theme.colors.textMuted,
-                fontFamily: theme.typography.fontFamily,
+                fontFamily: theme.typography.manrope.bold,
               },
             ]}
           >
             {coupon.likeCount + (liked ? 1 : 0)}
           </Text>
         </Pressable>
-        <Ionicons name="share-social-outline" size={17} color={theme.colors.textMuted} />
+        <ShareNetworkIcon size={17} color={theme.colors.textMuted} weight="bold" />
       </View>
     </View>
   );
@@ -220,11 +220,9 @@ const styles = StyleSheet.create({
   },
   username: {
     fontSize: 14,
-    fontWeight: '700',
   },
   date: {
     fontSize: 11,
-    fontWeight: '600',
     marginTop: 1,
   },
   statusBadge: {
@@ -233,7 +231,6 @@ const styles = StyleSheet.create({
   },
   statusBadgeText: {
     fontSize: 11,
-    fontWeight: '800',
   },
   tableHeader: {
     flexDirection: 'row',
@@ -245,7 +242,6 @@ const styles = StyleSheet.create({
   },
   tableHeaderLabel: {
     fontSize: 10,
-    fontWeight: '700',
     letterSpacing: 0.3,
   },
   tableHeaderMatches: {
@@ -272,12 +268,10 @@ const styles = StyleSheet.create({
   },
   footerLabel: {
     fontSize: 10,
-    fontWeight: '600',
     marginBottom: 4,
   },
   footerValue: {
     fontSize: 14,
-    fontWeight: '800',
   },
   socialRow: {
     flexDirection: 'row',
@@ -294,6 +288,5 @@ const styles = StyleSheet.create({
   },
   likeCount: {
     fontSize: 12,
-    fontWeight: '700',
   },
 });

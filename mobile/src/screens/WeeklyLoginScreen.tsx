@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import AmbientBackground from '../components/AmbientBackground';
 import ScreenHeader from '../components/ScreenHeader';
 import WeeklyDayCard, { type WeeklyDayStatus } from '../components/WeeklyDayCard';
 import PrimaryButton from '../components/PrimaryButton';
@@ -40,13 +41,14 @@ export default function WeeklyLoginScreen({ navigation }: Props) {
       style={[styles.root, { backgroundColor: theme.colors.background }]}
       edges={['top', 'left', 'right', 'bottom']}
     >
+      <AmbientBackground />
       <ScreenHeader title="Haftalık Giriş" onBack={() => navigation.goBack()} />
 
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View
           style={[
             styles.heroCard,
-            theme.shadow.card,
+            theme.shadow.ambient(theme.colors.primaryMuted),
             {
               backgroundColor: theme.colors.surface,
               borderColor: theme.colors.border,
@@ -64,7 +66,7 @@ export default function WeeklyLoginScreen({ navigation }: Props) {
               <Text
                 style={[
                   styles.eyebrowText,
-                  { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+                  { color: theme.colors.primary, fontFamily: theme.typography.manrope.extraBold },
                 ]}
               >
                 COINBET ÖDÜL PROGRAMI
@@ -84,7 +86,7 @@ export default function WeeklyLoginScreen({ navigation }: Props) {
               <Text
                 style={[
                   styles.weekBadgeText,
-                  { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                  { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
                 ]}
               >
                 BU HAFTA {activeDay}/7 GÜN
@@ -95,7 +97,7 @@ export default function WeeklyLoginScreen({ navigation }: Props) {
           <Text
             style={[
               styles.heroTitle,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
             ]}
           >
             7 Günlük Giriş Ödülü
@@ -103,7 +105,7 @@ export default function WeeklyLoginScreen({ navigation }: Props) {
           <Text
             style={[
               styles.heroSubtitle,
-              { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.medium },
             ]}
           >
             Her gün giriş yap, coin ödülünü kaçırma. Ödüller gün geçtikçe artar.
@@ -111,7 +113,7 @@ export default function WeeklyLoginScreen({ navigation }: Props) {
           <Text
             style={[
               styles.heroNote,
-              { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             Her pazartesi yenilenir
@@ -148,7 +150,7 @@ export default function WeeklyLoginScreen({ navigation }: Props) {
         <Text
           style={[
             styles.sectionTitle,
-            { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           Reklam İzle, Ekstra Coin Kazan
@@ -171,7 +173,7 @@ export default function WeeklyLoginScreen({ navigation }: Props) {
           <Text
             style={[
               styles.doneText,
-              { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.semiBold },
             ]}
           >
             Bugün için reklamlar bitti, yarın tekrar gel.
@@ -210,7 +212,6 @@ const styles = StyleSheet.create({
   },
   eyebrowText: {
     fontSize: 10,
-    fontWeight: '800',
     letterSpacing: 0.6,
   },
   weekBadge: {
@@ -220,27 +221,22 @@ const styles = StyleSheet.create({
   },
   weekBadgeText: {
     fontSize: 10,
-    fontWeight: '800',
     letterSpacing: 0.3,
   },
   heroTitle: {
     fontSize: 22,
-    fontWeight: '800',
     marginTop: 4,
   },
   heroSubtitle: {
     fontSize: 13,
-    fontWeight: '500',
     lineHeight: 18,
   },
   heroNote: {
     fontSize: 11,
-    fontWeight: '600',
     marginTop: 2,
   },
   sectionTitle: {
     fontSize: 13,
-    fontWeight: '700',
     marginTop: 16,
     marginBottom: 12,
   },
@@ -253,7 +249,6 @@ const styles = StyleSheet.create({
   },
   doneText: {
     fontSize: 12,
-    fontWeight: '600',
     textAlign: 'center',
     marginTop: 4,
   },

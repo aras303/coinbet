@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { CaretUpIcon, CaretDownIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 import type { OddsMarket } from '../types/matchDetail';
 
@@ -17,18 +17,18 @@ export default function OddsMarketCard({ market, selectedSelectionId, onSelect }
     <View
       style={[
         styles.card,
-        theme.shadow.card,
+        theme.shadow.ambient(theme.colors.primaryMuted),
         {
           backgroundColor: theme.colors.surface,
           borderColor: theme.colors.border,
-          borderRadius: theme.radius.md,
+          borderRadius: theme.radius.lg,
         },
       ]}
     >
       <Text
         style={[
           styles.title,
-          { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
         ]}
       >
         {market.title}
@@ -62,7 +62,7 @@ export default function OddsMarketCard({ market, selectedSelectionId, onSelect }
                   styles.selectionLabel,
                   {
                     color: active ? theme.colors.background : theme.colors.textSecondary,
-                    fontFamily: theme.typography.fontFamily,
+                    fontFamily: theme.typography.manrope.semiBold,
                   },
                 ]}
                 numberOfLines={1}
@@ -75,18 +75,18 @@ export default function OddsMarketCard({ market, selectedSelectionId, onSelect }
                     styles.selectionValue,
                     {
                       color: active ? theme.colors.background : theme.colors.text,
-                      fontFamily: theme.typography.fontFamily,
+                      fontFamily: theme.typography.manrope.extraBold,
                     },
                   ]}
                 >
                   {selection.value}
                 </Text>
                 {selection.trend !== 'flat' ? (
-                  <Ionicons
-                    name={selection.trend === 'up' ? 'caret-up' : 'caret-down'}
-                    size={11}
-                    color={trendColor}
-                  />
+                  selection.trend === 'up' ? (
+                    <CaretUpIcon size={11} color={trendColor} weight="bold" />
+                  ) : (
+                    <CaretDownIcon size={11} color={trendColor} weight="bold" />
+                  )
                 ) : null}
               </View>
             </Pressable>
@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 13,
-    fontWeight: '700',
     marginBottom: 10,
   },
   selectionsRow: {
@@ -125,7 +124,6 @@ const styles = StyleSheet.create({
   },
   selectionLabel: {
     fontSize: 11,
-    fontWeight: '600',
     textAlign: 'center',
   },
   valueRow: {
@@ -135,6 +133,5 @@ const styles = StyleSheet.create({
   },
   selectionValue: {
     fontSize: 13.5,
-    fontWeight: '800',
   },
 });

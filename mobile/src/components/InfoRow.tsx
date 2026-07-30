@@ -16,7 +16,7 @@ export default function InfoRow({ label, value, valueColor }: Props) {
       <Text
         style={[
           styles.label,
-          { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
         ]}
       >
         {label}
@@ -24,7 +24,7 @@ export default function InfoRow({ label, value, valueColor }: Props) {
       <Text
         style={[
           styles.value,
-          { color: valueColor ?? theme.colors.text, fontFamily: theme.typography.fontFamily },
+          { color: valueColor ?? theme.colors.text, fontFamily: theme.typography.manrope.bold },
         ]}
       >
         {value}
@@ -43,10 +43,8 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 13,
-    fontWeight: '600',
   },
   value: {
     fontSize: 14,
-    fontWeight: '700',
   },
 });
