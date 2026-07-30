@@ -37,6 +37,7 @@ export default function DatePickerModal({ visible, selectedDate, onSelect, onClo
         <View
           style={[
             styles.card,
+            theme.shadow.raised,
             {
               backgroundColor: theme.colors.surface,
               borderColor: theme.colors.border,
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
   card: {
     width: '100%',
     maxWidth: 360,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,
     padding: 20,
   },
   header: {

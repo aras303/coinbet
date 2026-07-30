@@ -18,7 +18,7 @@ export default function MatchDetailHeader({ match, onBack }: Props) {
   const showScore = live || finished;
 
   return (
-    <View style={[styles.wrapper, { backgroundColor: theme.colors.surface }]}>
+    <View style={[styles.wrapper, theme.shadow.card, { backgroundColor: theme.colors.surface }]}>
       <View style={styles.topRow}>
         <Pressable onPress={onBack} hitSlop={12} style={styles.backButton}>
           <Ionicons name="chevron-back" size={24} color={theme.colors.text} />

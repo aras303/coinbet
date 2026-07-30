@@ -26,8 +26,8 @@ export default function TopBar({ onMenuPress }: Props) {
         style={[
           styles.balance,
           {
-            backgroundColor: theme.colors.surface,
-            borderColor: theme.colors.border,
+            backgroundColor: `${theme.colors.primary}16`,
+            borderColor: `${theme.colors.primary}40`,
             borderRadius: theme.radius.full,
           },
         ]}
@@ -63,9 +63,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    borderWidth: StyleSheet.hairlineWidth,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    borderWidth: 1,
+    paddingHorizontal: 13,
+    paddingVertical: 7,
   },
   balanceText: {
     fontSize: 13,

@@ -34,6 +34,7 @@ export default function OddsCategoryTabs({ active, onChange }: Props) {
             onPress={() => onChange(category.key)}
             style={[
               styles.chip,
+              isActive && theme.shadow.glow(theme.colors.primary),
               {
                 backgroundColor: isActive ? theme.colors.primary : theme.colors.surface,
                 borderColor: isActive ? theme.colors.primary : theme.colors.border,
@@ -67,9 +68,9 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   chip: {
-    borderWidth: StyleSheet.hairlineWidth,
-    paddingHorizontal: 14,
-    paddingVertical: 7,
+    borderWidth: 1,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
   },
   label: {
     fontSize: 13,

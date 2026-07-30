@@ -14,6 +14,7 @@ export default function StandingsTable({ rows }: Props) {
     <View
       style={[
         styles.card,
+        theme.shadow.card,
         {
           backgroundColor: theme.colors.surface,
           borderColor: theme.colors.border,
@@ -146,7 +147,7 @@ export default function StandingsTable({ rows }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,
     marginHorizontal: 16,
     marginBottom: 16,
     overflow: 'hidden',

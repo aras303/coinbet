@@ -9,6 +9,7 @@ import MyCouponsScreen from '../screens/MyCouponsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { darkColors } from '../theme/colors';
 import { typography } from '../theme/typography';
+import { shadow } from '../theme/shadow';
 import type { RootTabParamList } from './types';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -43,6 +44,7 @@ export default function MainTabs() {
           backgroundColor: darkColors.surface,
           borderTopColor: darkColors.border,
           borderTopWidth: StyleSheet.hairlineWidth,
+          ...shadow.raised,
         },
         tabBarLabelStyle: {
           fontFamily: typography.fontFamily,

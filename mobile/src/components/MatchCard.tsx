@@ -19,12 +19,14 @@ export default function MatchCard({ match, onPress }: Props) {
   return (
     <Pressable
       onPress={onPress}
-      style={[
+      style={({ pressed }) => [
         styles.card,
+        theme.shadow.card,
         {
           backgroundColor: theme.colors.surface,
-          borderColor: theme.colors.border,
+          borderColor: live ? `${theme.colors.primary}55` : theme.colors.border,
           borderRadius: theme.radius.md,
+          opacity: pressed ? 0.9 : 1,
         },
       ]}
     >
@@ -39,7 +41,15 @@ export default function MatchCard({ match, onPress }: Props) {
         >
           {match.league.name}
         </Text>
-        <View style={[styles.statusPill, live && { backgroundColor: `${theme.colors.primary}22` }]}>
+        <View
+          style={[
+            styles.statusPill,
+            {
+              backgroundColor: live ? `${theme.colors.primary}22` : theme.colors.surfaceElevated,
+              borderRadius: theme.radius.sm,
+            },
+          ]}
+        >
           <Text
             style={[
               styles.statusText,
@@ -56,7 +66,7 @@ export default function MatchCard({ match, onPress }: Props) {
 
       <View style={styles.teamsBlock}>
         <View style={styles.teamRow}>
-          <RemoteLogo uri={match.teams.home.logo} size={24} />
+          <RemoteLogo uri={match.teams.home.logo} size={26} />
           <Text
             style={[
               styles.teamName,
@@ -79,7 +89,7 @@ export default function MatchCard({ match, onPress }: Props) {
         </View>
 
         <View style={styles.teamRow}>
-          <RemoteLogo uri={match.teams.away.logo} size={24} />
+          <RemoteLogo uri={match.teams.away.logo} size={26} />
           <Text
             style={[
               styles.teamName,
@@ -120,7 +130,11 @@ function OddsPill({ label, value }: { label: string; value: string }) {
     <View
       style={[
         styles.oddsPill,
-        { backgroundColor: theme.colors.surfaceElevated, borderRadius: theme.radius.sm },
+        {
+          backgroundColor: theme.colors.surfaceElevated,
+          borderColor: theme.colors.border,
+          borderRadius: theme.radius.sm,
+        },
       ]}
     >
       <Text
@@ -134,7 +148,7 @@ function OddsPill({ label, value }: { label: string; value: string }) {
       <Text
         style={[
           styles.oddsValue,
-          { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
         ]}
       >
         {value}
@@ -145,67 +159,68 @@ function OddsPill({ label, value }: { label: string; value: string }) {
 
 const styles = StyleSheet.create({
   card: {
-    borderWidth: StyleSheet.hairlineWidth,
-    padding: 14,
+    borderWidth: 1,
+    padding: 16,
     marginHorizontal: 16,
-    marginBottom: 12,
+    marginBottom: 14,
   },
   leagueRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    marginBottom: 12,
+    marginBottom: 14,
   },
   leagueName: {
     flex: 1,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '700',
+    letterSpacing: 0.2,
   },
   statusPill: {
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 6,
+    paddingHorizontal: 9,
+    paddingVertical: 4,
   },
   statusText: {
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   teamsBlock: {
-    gap: 10,
+    gap: 12,
   },
   teamRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: 12,
   },
   teamName: {
     flex: 1,
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 14.5,
+    fontWeight: '700',
   },
   goals: {
-    fontSize: 15,
-    fontWeight: '700',
+    fontSize: 16,
+    fontWeight: '800',
   },
   oddsRow: {
     flexDirection: 'row',
-    gap: 8,
-    marginTop: 14,
-    paddingTop: 12,
+    gap: 10,
+    marginTop: 16,
+    paddingTop: 14,
     borderTopWidth: StyleSheet.hairlineWidth,
   },
   oddsPill: {
     flex: 1,
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 10,
+    borderWidth: StyleSheet.hairlineWidth,
   },
   oddsLabel: {
     fontSize: 10,
     fontWeight: '700',
-    marginBottom: 2,
+    marginBottom: 3,
   },
   oddsValue: {
-    fontSize: 13,
-    fontWeight: '700',
+    fontSize: 14,
+    fontWeight: '800',
   },
 });

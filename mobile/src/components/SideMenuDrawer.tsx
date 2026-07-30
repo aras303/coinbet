@@ -52,6 +52,7 @@ export default function SideMenuDrawer({ visible, onClose }: Props) {
       <Animated.View
         style={[
           styles.panel,
+          theme.shadow.raised,
           {
             width: DRAWER_WIDTH,
             backgroundColor: theme.colors.surface,

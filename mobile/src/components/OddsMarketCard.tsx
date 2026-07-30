@@ -16,6 +16,7 @@ export default function OddsMarketCard({ market, selectedSelectionId, onSelect }
     <View
       style={[
         styles.card,
+        theme.shadow.card,
         {
           backgroundColor: theme.colors.surface,
           borderColor: theme.colors.border,
@@ -41,6 +42,7 @@ export default function OddsMarketCard({ market, selectedSelectionId, onSelect }
               onPress={() => onSelect(market.id, selection.id)}
               style={[
                 styles.selection,
+                active && theme.shadow.glow(theme.colors.primary),
                 {
                   backgroundColor: active ? theme.colors.primary : theme.colors.surfaceElevated,
                   borderColor: active ? theme.colors.primary : theme.colors.border,
@@ -81,7 +83,7 @@ export default function OddsMarketCard({ market, selectedSelectionId, onSelect }
 
 const styles = StyleSheet.create({
   card: {
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,
     padding: 16,
     marginHorizontal: 16,
     marginBottom: 14,
@@ -99,9 +101,9 @@ const styles = StyleSheet.create({
   selection: {
     flexGrow: 1,
     flexBasis: '30%',
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingVertical: 13,
     paddingHorizontal: 8,
     gap: 6,
   },
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   selectionValue: {
-    fontSize: 15,
+    fontSize: 15.5,
     fontWeight: '800',
   },
 });

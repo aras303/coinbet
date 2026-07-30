@@ -15,6 +15,7 @@ export default function PrimaryButton({ label, onPress }: Props) {
       onPress={onPress}
       style={({ pressed }) => [
         styles.button,
+        theme.shadow.glow(theme.colors.primary),
         {
           backgroundColor: theme.colors.primary,
           borderRadius: theme.radius.md,

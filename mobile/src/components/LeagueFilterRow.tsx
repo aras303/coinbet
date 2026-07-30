@@ -46,6 +46,7 @@ function Chip({ label, logo, active, onPress }: ChipProps) {
       onPress={onPress}
       style={[
         styles.chip,
+        active && theme.shadow.glow(theme.colors.primary),
         {
           backgroundColor: active ? theme.colors.primary : theme.colors.surface,
           borderColor: active ? theme.colors.primary : theme.colors.border,
@@ -81,9 +82,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    borderWidth: StyleSheet.hairlineWidth,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
+    borderWidth: 1,
+    paddingHorizontal: 13,
+    paddingVertical: 8,
   },
   chipLabel: {
     fontSize: 13,
