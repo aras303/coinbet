@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { MagnifyingGlassIcon, XCircleIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 
 type Props = {
@@ -22,7 +22,7 @@ export default function SearchBar({ value, onChangeText }: Props) {
         },
       ]}
     >
-      <Ionicons name="search-outline" size={18} color={theme.colors.textMuted} />
+      <MagnifyingGlassIcon size={18} color={theme.colors.textMuted} weight="bold" />
       <TextInput
         value={value}
         onChangeText={onChangeText}
@@ -30,14 +30,14 @@ export default function SearchBar({ value, onChangeText }: Props) {
         placeholderTextColor={theme.colors.textMuted}
         style={[
           styles.input,
-          { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.text, fontFamily: theme.typography.manrope.medium },
         ]}
         autoCapitalize="none"
         autoCorrect={false}
       />
       {value.length > 0 ? (
         <Pressable onPress={() => onChangeText('')} hitSlop={8}>
-          <Ionicons name="close-circle" size={18} color={theme.colors.textMuted} />
+          <XCircleIcon size={18} color={theme.colors.textMuted} weight="fill" />
         </Pressable>
       ) : null}
     </View>

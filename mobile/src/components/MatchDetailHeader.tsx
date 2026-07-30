@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { SoccerBallIcon } from 'phosphor-react-native';
 import RemoteLogo from './RemoteLogo';
 import { useTheme } from '../theme/ThemeContext';
 import type { Match } from '../types/match';
@@ -25,7 +26,7 @@ export default function MatchDetailHeader({ match, onBack }: Props) {
         </Pressable>
 
         <View style={styles.leagueRow}>
-          <RemoteLogo uri={match.league.logo} size={16} fallbackIcon="football-outline" />
+          <RemoteLogo uri={match.league.logo} size={16} fallbackIcon={SoccerBallIcon} />
           <Text
             style={[
               styles.leagueName,

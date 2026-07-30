@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { CalendarBlankIcon, CaretDownIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 import { formatDisplayDate } from '../utils/date';
 
@@ -18,16 +18,16 @@ export default function CalendarRow({ date, onPress }: Props) {
       style={[styles.row, { borderBottomColor: theme.colors.border }]}
       hitSlop={4}
     >
-      <Ionicons name="calendar-outline" size={17} color={theme.colors.primary} />
+      <CalendarBlankIcon size={17} color={theme.colors.primary} weight="duotone" />
       <Text
         style={[
           styles.label,
-          { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.text, fontFamily: theme.typography.manrope.semiBold },
         ]}
       >
         {formatDisplayDate(date)}
       </Text>
-      <Ionicons name="chevron-down" size={15} color={theme.colors.textMuted} />
+      <CaretDownIcon size={14} color={theme.colors.textMuted} weight="bold" />
     </Pressable>
   );
 }
@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: '600',
     flex: 1,
   },
 });

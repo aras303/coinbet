@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Image, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { type Icon, TShirtIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 
 type Props = {
   uri: string | null;
   size: number;
-  fallbackIcon?: keyof typeof Ionicons.glyphMap;
+  fallbackIcon?: Icon;
 };
 
-export default function RemoteLogo({ uri, size, fallbackIcon = 'shirt-outline' }: Props) {
+export default function RemoteLogo({ uri, size, fallbackIcon: FallbackIcon = TShirtIcon }: Props) {
   const theme = useTheme();
   const [failed, setFailed] = useState(false);
 
@@ -25,7 +25,7 @@ export default function RemoteLogo({ uri, size, fallbackIcon = 'shirt-outline' }
           justifyContent: 'center',
         }}
       >
-        <Ionicons name={fallbackIcon} size={size * 0.55} color={theme.colors.textMuted} />
+        <FallbackIcon size={size * 0.55} color={theme.colors.textMuted} weight="fill" />
       </View>
     );
   }

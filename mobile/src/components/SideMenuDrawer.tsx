@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Animated, Dimensions, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import {
+  type Icon,
+  TrophyIcon,
+  CalendarBlankIcon,
+  CheckSquareIcon,
+  GearSixIcon,
+} from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 
 type Props = {
@@ -12,11 +18,11 @@ type Props = {
 
 const DRAWER_WIDTH = Math.min(300, Dimensions.get('window').width * 0.8);
 
-const MENU_ITEMS: { key: string; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
-  { key: 'leaderboard', label: 'Sıralama', icon: 'trophy-outline' },
-  { key: 'weekly-login', label: 'Haftalık Giriş', icon: 'calendar-outline' },
-  { key: 'tasks', label: 'Görevler', icon: 'checkbox-outline' },
-  { key: 'settings', label: 'Ayarlar', icon: 'settings-outline' },
+const MENU_ITEMS: { key: string; label: string; icon: Icon }[] = [
+  { key: 'leaderboard', label: 'Sıralama', icon: TrophyIcon },
+  { key: 'weekly-login', label: 'Haftalık Giriş', icon: CalendarBlankIcon },
+  { key: 'tasks', label: 'Görevler', icon: CheckSquareIcon },
+  { key: 'settings', label: 'Ayarlar', icon: GearSixIcon },
 ];
 
 export default function SideMenuDrawer({ visible, onClose, onSelect }: Props) {
@@ -66,7 +72,7 @@ export default function SideMenuDrawer({ visible, onClose, onSelect }: Props) {
           <Text
             style={[
               styles.brand,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
             ]}
           >
             CoinBet
@@ -81,11 +87,11 @@ export default function SideMenuDrawer({ visible, onClose, onSelect }: Props) {
                 onSelect?.(item.key);
               }}
             >
-              <Ionicons name={item.icon} size={20} color={theme.colors.textSecondary} />
+              <item.icon size={20} color={theme.colors.textSecondary} weight="duotone" />
               <Text
                 style={[
                   styles.itemLabel,
-                  { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                  { color: theme.colors.text, fontFamily: theme.typography.manrope.semiBold },
                 ]}
               >
                 {item.label}
@@ -120,7 +126,6 @@ const styles = StyleSheet.create({
   },
   brand: {
     fontSize: 18,
-    fontWeight: '800',
     marginBottom: 24,
   },
   item: {
@@ -131,6 +136,5 @@ const styles = StyleSheet.create({
   },
   itemLabel: {
     fontSize: 15,
-    fontWeight: '600',
   },
 });

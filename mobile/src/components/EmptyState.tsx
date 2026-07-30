@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { SoccerBallIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 
 type Props = {
@@ -12,11 +12,11 @@ export default function EmptyState({ message }: Props) {
 
   return (
     <View style={styles.wrapper}>
-      <Ionicons name="football-outline" size={40} color={theme.colors.textMuted} />
+      <SoccerBallIcon size={40} color={theme.colors.textMuted} weight="light" />
       <Text
         style={[
           styles.text,
-          { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.textSecondary, fontFamily: theme.typography.manrope.semiBold },
         ]}
       >
         {message}
@@ -35,6 +35,5 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    fontWeight: '600',
   },
 });

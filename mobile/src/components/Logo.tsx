@@ -14,7 +14,11 @@ export default function Logo({ size = 34 }: Props) {
       <Text
         style={[
           styles.text,
-          { fontSize: size, color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+          {
+            fontSize: size,
+            color: theme.colors.text,
+            fontFamily: theme.typography.manrope.extraBold,
+          },
         ]}
       >
         Coin
@@ -22,7 +26,11 @@ export default function Logo({ size = 34 }: Props) {
       <Text
         style={[
           styles.text,
-          { fontSize: size, color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+          {
+            fontSize: size,
+            color: theme.colors.primary,
+            fontFamily: theme.typography.manrope.extraBold,
+          },
         ]}
       >
         Bet
@@ -36,7 +44,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   text: {
-    fontWeight: '800',
     letterSpacing: 0.5,
   },
 });

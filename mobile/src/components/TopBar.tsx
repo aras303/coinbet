@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { ListIcon, CoinsIcon } from 'phosphor-react-native';
 import Logo from './Logo';
 import { useTheme } from '../theme/ThemeContext';
 
@@ -17,7 +17,7 @@ export default function TopBar({ onMenuPress }: Props) {
     <View style={styles.row}>
       <View style={styles.left}>
         <Pressable onPress={onMenuPress} hitSlop={12}>
-          <Ionicons name="menu" size={26} color={theme.colors.text} />
+          <ListIcon size={24} color={theme.colors.text} weight="bold" />
         </Pressable>
         <Logo size={20} />
       </View>
@@ -32,11 +32,11 @@ export default function TopBar({ onMenuPress }: Props) {
           },
         ]}
       >
-        <Ionicons name="cash-outline" size={15} color={theme.colors.primary} />
+        <CoinsIcon size={15} color={theme.colors.primary} weight="duotone" />
         <Text
           style={[
             styles.balanceText,
-            { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+            { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
           ]}
         >
           {COIN_BALANCE}
@@ -69,6 +69,5 @@ const styles = StyleSheet.create({
   },
   balanceText: {
     fontSize: 13,
-    fontWeight: '700',
   },
 });

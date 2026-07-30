@@ -1,4 +1,5 @@
 export { default as ScreenContainer } from './ScreenContainer';
+export { default as AmbientBackground } from './AmbientBackground';
 export { default as StadiumBackground } from './StadiumBackground';
 export { default as Logo } from './Logo';
 export { default as TextField } from './TextField';

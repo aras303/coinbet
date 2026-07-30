@@ -47,7 +47,7 @@ export default function MatchCard({ match, onPress }: Props) {
               styles.statusText,
               {
                 color: live ? theme.colors.primary : theme.colors.textMuted,
-                fontFamily: theme.typography.fontFamily,
+                fontFamily: theme.typography.manrope.extraBold,
               },
             ]}
           >
@@ -62,7 +62,7 @@ export default function MatchCard({ match, onPress }: Props) {
           <Text
             style={[
               styles.teamName,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
             ]}
             numberOfLines={1}
           >
@@ -72,7 +72,7 @@ export default function MatchCard({ match, onPress }: Props) {
             <Text
               style={[
                 styles.goals,
-                { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
               ]}
             >
               {match.goals.home ?? 0}
@@ -85,7 +85,7 @@ export default function MatchCard({ match, onPress }: Props) {
           <Text
             style={[
               styles.teamName,
-              { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+              { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
             ]}
             numberOfLines={1}
           >
@@ -95,7 +95,7 @@ export default function MatchCard({ match, onPress }: Props) {
             <Text
               style={[
                 styles.goals,
-                { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
               ]}
             >
               {match.goals.away ?? 0}
@@ -132,7 +132,7 @@ function OddsPill({ label, value }: { label: string; value: string }) {
       <Text
         style={[
           styles.oddsLabel,
-          { color: theme.colors.textMuted, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.bold },
         ]}
       >
         {label}
@@ -140,7 +140,7 @@ function OddsPill({ label, value }: { label: string; value: string }) {
       <Text
         style={[
           styles.oddsValue,
-          { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+          { color: theme.colors.primary, fontFamily: theme.typography.manrope.extraBold },
         ]}
       >
         {value}
@@ -169,7 +169,6 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontSize: 11,
-    fontWeight: '800',
   },
   teamsBlock: {
     gap: 12,
@@ -182,11 +181,9 @@ const styles = StyleSheet.create({
   teamName: {
     flex: 1,
     fontSize: 14.5,
-    fontWeight: '700',
   },
   goals: {
     fontSize: 16,
-    fontWeight: '800',
   },
   oddsRow: {
     flexDirection: 'row',
@@ -203,11 +200,9 @@ const styles = StyleSheet.create({
   },
   oddsLabel: {
     fontSize: 10,
-    fontWeight: '700',
     marginBottom: 3,
   },
   oddsValue: {
     fontSize: 14,
-    fontWeight: '800',
   },
 });

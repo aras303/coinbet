@@ -3,6 +3,7 @@ import { SectionList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import AmbientBackground from '../components/AmbientBackground';
 import TopBar from '../components/TopBar';
 import SideMenuDrawer from '../components/SideMenuDrawer';
 import CalendarRow from '../components/CalendarRow';
@@ -66,6 +67,7 @@ export default function HomeScreen() {
       style={[styles.root, { backgroundColor: theme.colors.background }]}
       edges={['top', 'left', 'right']}
     >
+      <AmbientBackground />
       <TopBar onMenuPress={() => setMenuVisible(true)} />
       <CalendarRow date={selectedDate} onPress={() => setDatePickerVisible(true)} />
 

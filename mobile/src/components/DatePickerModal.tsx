@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { CaretLeftIcon, CaretRightIcon } from 'phosphor-react-native';
 import { useTheme } from '../theme/ThemeContext';
 import { addMonths, formatMonthYear, getMonthGrid, isSameDay, startOfMonth } from '../utils/date';
 
@@ -47,24 +47,30 @@ export default function DatePickerModal({ visible, selectedDate, onSelect, onClo
         >
           <View style={styles.header}>
             <Pressable onPress={() => setViewedMonth((m) => addMonths(m, -1))} hitSlop={8}>
-              <Ionicons name="chevron-back" size={20} color={theme.colors.text} />
+              <CaretLeftIcon size={18} color={theme.colors.text} weight="bold" />
             </Pressable>
             <Text
               style={[
                 styles.headerLabel,
-                { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
               ]}
             >
               {formatMonthYear(viewedMonth)}
             </Text>
             <Pressable onPress={() => setViewedMonth((m) => addMonths(m, 1))} hitSlop={8}>
-              <Ionicons name="chevron-forward" size={20} color={theme.colors.text} />
+              <CaretRightIcon size={18} color={theme.colors.text} weight="bold" />
             </Pressable>
           </View>
 
           <View style={styles.weekdayRow}>
             {WEEKDAY_LABELS.map((label) => (
-              <Text key={label} style={[styles.weekdayLabel, { color: theme.colors.textMuted }]}>
+              <Text
+                key={label}
+                style={[
+                  styles.weekdayLabel,
+                  { color: theme.colors.textMuted, fontFamily: theme.typography.manrope.semiBold },
+                ]}
+              >
                 {label}
               </Text>
             ))}
@@ -98,7 +104,7 @@ export default function DatePickerModal({ visible, selectedDate, onSelect, onClo
                         styles.dayLabel,
                         {
                           color: active ? theme.colors.background : theme.colors.text,
-                          fontFamily: theme.typography.fontFamily,
+                          fontFamily: theme.typography.manrope.semiBold,
                         },
                       ]}
                     >
@@ -120,7 +126,7 @@ export default function DatePickerModal({ visible, selectedDate, onSelect, onClo
             <Text
               style={[
                 styles.todayLabel,
-                { color: theme.colors.primary, fontFamily: theme.typography.fontFamily },
+                { color: theme.colors.primary, fontFamily: theme.typography.manrope.bold },
               ]}
             >
               Bugün
@@ -160,7 +166,6 @@ const styles = StyleSheet.create({
   },
   headerLabel: {
     fontSize: 15,
-    fontWeight: '700',
   },
   weekdayRow: {
     flexDirection: 'row',
@@ -170,7 +175,6 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     fontSize: 12,
-    fontWeight: '600',
   },
   weekRow: {
     flexDirection: 'row',
@@ -183,7 +187,6 @@ const styles = StyleSheet.create({
   },
   dayLabel: {
     fontSize: 14,
-    fontWeight: '600',
   },
   todayButton: {
     alignItems: 'center',
@@ -192,6 +195,5 @@ const styles = StyleSheet.create({
   },
   todayLabel: {
     fontSize: 14,
-    fontWeight: '700',
   },
 });

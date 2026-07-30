@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { SoccerBallIcon } from 'phosphor-react-native';
 import RemoteLogo from './RemoteLogo';
 import { useTheme } from '../theme/ThemeContext';
 import type { League } from '../types/match';
@@ -18,9 +19,12 @@ export default function LeagueSectionHeader({ league }: Props) {
         { backgroundColor: theme.colors.background, borderBottomColor: theme.colors.border },
       ]}
     >
-      <RemoteLogo uri={league.logo} size={20} fallbackIcon="football-outline" />
+      <RemoteLogo uri={league.logo} size={20} fallbackIcon={SoccerBallIcon} />
       <Text
-        style={[styles.name, { color: theme.colors.text, fontFamily: theme.typography.fontFamily }]}
+        style={[
+          styles.name,
+          { color: theme.colors.text, fontFamily: theme.typography.manrope.extraBold },
+        ]}
         numberOfLines={1}
       >
         {league.name}
@@ -42,6 +46,5 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 14,
-    fontWeight: '800',
   },
 });

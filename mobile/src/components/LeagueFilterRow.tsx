@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
+import { SoccerBallIcon } from 'phosphor-react-native';
 import RemoteLogo from './RemoteLogo';
 import { useTheme } from '../theme/ThemeContext';
 import type { League } from '../types/match';
@@ -54,13 +55,13 @@ function Chip({ label, logo, active, onPress }: ChipProps) {
         },
       ]}
     >
-      {logo ? <RemoteLogo uri={logo} size={16} fallbackIcon="football-outline" /> : null}
+      {logo ? <RemoteLogo uri={logo} size={16} fallbackIcon={SoccerBallIcon} /> : null}
       <Text
         style={[
           styles.chipLabel,
           {
             color: active ? theme.colors.background : theme.colors.textSecondary,
-            fontFamily: theme.typography.fontFamily,
+            fontFamily: theme.typography.manrope.semiBold,
           },
         ]}
         numberOfLines={1}
@@ -89,7 +90,6 @@ const styles = StyleSheet.create({
   },
   chipLabel: {
     fontSize: 12,
-    fontWeight: '600',
     maxWidth: 120,
   },
 });
