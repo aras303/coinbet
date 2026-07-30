@@ -5,9 +5,10 @@ import { useTheme } from '../theme/ThemeContext';
 type Props = {
   label: string;
   value: string;
+  valueColor?: string;
 };
 
-export default function InfoRow({ label, value }: Props) {
+export default function InfoRow({ label, value, valueColor }: Props) {
   const theme = useTheme();
 
   return (
@@ -23,7 +24,7 @@ export default function InfoRow({ label, value }: Props) {
       <Text
         style={[
           styles.value,
-          { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
+          { color: valueColor ?? theme.colors.text, fontFamily: theme.typography.fontFamily },
         ]}
       >
         {value}

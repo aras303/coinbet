@@ -29,3 +29,6 @@ export { default as ScreenHeader } from './ScreenHeader';
 export { default as WeeklyDayCard } from './WeeklyDayCard';
 export { default as AdRewardCard } from './AdRewardCard';
 export { default as AdPlayingModal } from './AdPlayingModal';
+export { default as WinRateDonutChart } from './WinRateDonutChart';
+export { default as CouponCard } from './CouponCard';
+export { default as CouponMatchRow } from './CouponMatchRow';
