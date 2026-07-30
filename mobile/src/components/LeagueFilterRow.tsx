@@ -50,7 +50,7 @@ function Chip({ label, logo, active, onPress }: ChipProps) {
         {
           backgroundColor: active ? theme.colors.primary : theme.colors.surface,
           borderColor: active ? theme.colors.primary : theme.colors.border,
-          borderRadius: theme.radius.full,
+          borderRadius: theme.radius.sm,
         },
       ]}
     >
@@ -74,21 +74,22 @@ function Chip({ label, logo, active, onPress }: ChipProps) {
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    gap: 8,
+    alignItems: 'center',
+    gap: 6,
     paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingVertical: 8,
   },
   chip: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    gap: 5,
     borderWidth: 1,
-    paddingHorizontal: 13,
-    paddingVertical: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
   },
   chipLabel: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '600',
-    maxWidth: 140,
+    maxWidth: 120,
   },
 });

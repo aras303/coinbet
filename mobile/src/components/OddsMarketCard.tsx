@@ -100,31 +100,31 @@ export default function OddsMarketCard({ market, selectedSelectionId, onSelect }
 const styles = StyleSheet.create({
   card: {
     borderWidth: 1,
-    padding: 16,
+    padding: 14,
     marginHorizontal: 16,
-    marginBottom: 14,
+    marginBottom: 12,
   },
   title: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '700',
-    marginBottom: 12,
+    marginBottom: 10,
   },
   selectionsRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 10,
+    gap: 8,
   },
   selection: {
     flexGrow: 1,
     flexBasis: '30%',
     borderWidth: 1,
     alignItems: 'center',
-    paddingVertical: 13,
-    paddingHorizontal: 8,
-    gap: 6,
+    paddingVertical: 8,
+    paddingHorizontal: 6,
+    gap: 3,
   },
   selectionLabel: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '600',
     textAlign: 'center',
   },
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   selectionValue: {
-    fontSize: 15.5,
+    fontSize: 13.5,
     fontWeight: '800',
   },
 });

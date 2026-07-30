@@ -38,7 +38,7 @@ export default function OddsCategoryTabs({ active, onChange }: Props) {
               {
                 backgroundColor: isActive ? theme.colors.primary : theme.colors.surface,
                 borderColor: isActive ? theme.colors.primary : theme.colors.border,
-                borderRadius: theme.radius.full,
+                borderRadius: theme.radius.sm,
               },
             ]}
           >
@@ -63,17 +63,17 @@ export default function OddsCategoryTabs({ active, onChange }: Props) {
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    gap: 8,
+    gap: 6,
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 10,
   },
   chip: {
     borderWidth: 1,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
+    paddingHorizontal: 11,
+    paddingVertical: 6,
   },
   label: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '600',
   },
 });
