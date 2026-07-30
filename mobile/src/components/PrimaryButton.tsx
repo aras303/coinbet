@@ -5,28 +5,32 @@ import { useTheme } from '../theme/ThemeContext';
 type Props = {
   label: string;
   onPress?: () => void;
+  disabled?: boolean;
 };
 
-export default function PrimaryButton({ label, onPress }: Props) {
+export default function PrimaryButton({ label, onPress, disabled }: Props) {
   const theme = useTheme();
 
   return (
     <Pressable
-      onPress={onPress}
+      onPress={disabled ? undefined : onPress}
       style={({ pressed }) => [
         styles.button,
-        theme.shadow.glow(theme.colors.primary),
+        !disabled && theme.shadow.glow(theme.colors.primary),
         {
-          backgroundColor: theme.colors.primary,
+          backgroundColor: disabled ? theme.colors.surfaceElevated : theme.colors.primary,
           borderRadius: theme.radius.md,
-          opacity: pressed ? 0.85 : 1,
+          opacity: pressed && !disabled ? 0.85 : 1,
         },
       ]}
     >
       <Text
         style={[
           styles.label,
-          { color: theme.colors.background, fontFamily: theme.typography.fontFamily },
+          {
+            color: disabled ? theme.colors.textMuted : theme.colors.background,
+            fontFamily: theme.typography.fontFamily,
+          },
         ]}
       >
         {label}

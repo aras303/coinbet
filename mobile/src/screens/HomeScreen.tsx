@@ -119,7 +119,15 @@ export default function HomeScreen() {
         onSelect={setSelectedDate}
         onClose={() => setDatePickerVisible(false)}
       />
-      <SideMenuDrawer visible={menuVisible} onClose={() => setMenuVisible(false)} />
+      <SideMenuDrawer
+        visible={menuVisible}
+        onClose={() => setMenuVisible(false)}
+        onSelect={(key) => {
+          if (key === 'weekly-login') {
+            navigation.navigate('WeeklyLogin');
+          }
+        }}
+      />
     </SafeAreaView>
   );
 }

@@ -7,6 +7,7 @@ import { useTheme } from '../theme/ThemeContext';
 type Props = {
   visible: boolean;
   onClose: () => void;
+  onSelect?: (key: string) => void;
 };
 
 const DRAWER_WIDTH = Math.min(300, Dimensions.get('window').width * 0.8);
@@ -18,7 +19,7 @@ const MENU_ITEMS: { key: string; label: string; icon: keyof typeof Ionicons.glyp
   { key: 'settings', label: 'Ayarlar', icon: 'settings-outline' },
 ];
 
-export default function SideMenuDrawer({ visible, onClose }: Props) {
+export default function SideMenuDrawer({ visible, onClose, onSelect }: Props) {
   const theme = useTheme();
   const [translateX] = useState(() => new Animated.Value(-DRAWER_WIDTH));
   const [backdropOpacity] = useState(() => new Animated.Value(0));
@@ -72,7 +73,14 @@ export default function SideMenuDrawer({ visible, onClose }: Props) {
           </Text>
 
           {MENU_ITEMS.map((item) => (
-            <Pressable key={item.key} style={styles.item} onPress={onClose}>
+            <Pressable
+              key={item.key}
+              style={styles.item}
+              onPress={() => {
+                onClose();
+                onSelect?.(item.key);
+              }}
+            >
               <Ionicons name={item.icon} size={20} color={theme.colors.textSecondary} />
               <Text
                 style={[
