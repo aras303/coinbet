@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../theme/ThemeContext';
 import type { OddsMarket } from '../types/matchDetail';
 
@@ -36,6 +37,12 @@ export default function OddsMarketCard({ market, selectedSelectionId, onSelect }
       <View style={styles.selectionsRow}>
         {market.selections.map((selection) => {
           const active = selection.id === selectedSelectionId;
+          const trendColor = active
+            ? theme.colors.background
+            : selection.trend === 'up'
+              ? theme.colors.success
+              : theme.colors.danger;
+
           return (
             <Pressable
               key={selection.id}
@@ -62,17 +69,26 @@ export default function OddsMarketCard({ market, selectedSelectionId, onSelect }
               >
                 {selection.label}
               </Text>
-              <Text
-                style={[
-                  styles.selectionValue,
-                  {
-                    color: active ? theme.colors.background : theme.colors.text,
-                    fontFamily: theme.typography.fontFamily,
-                  },
-                ]}
-              >
-                {selection.value}
-              </Text>
+              <View style={styles.valueRow}>
+                <Text
+                  style={[
+                    styles.selectionValue,
+                    {
+                      color: active ? theme.colors.background : theme.colors.text,
+                      fontFamily: theme.typography.fontFamily,
+                    },
+                  ]}
+                >
+                  {selection.value}
+                </Text>
+                {selection.trend !== 'flat' ? (
+                  <Ionicons
+                    name={selection.trend === 'up' ? 'caret-up' : 'caret-down'}
+                    size={11}
+                    color={trendColor}
+                  />
+                ) : null}
+              </View>
             </Pressable>
           );
         })}
@@ -111,6 +127,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
     textAlign: 'center',
+  },
+  valueRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 3,
   },
   selectionValue: {
     fontSize: 15.5,

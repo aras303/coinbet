@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { SectionList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -9,6 +9,7 @@ import CalendarRow from '../components/CalendarRow';
 import DatePickerModal from '../components/DatePickerModal';
 import SearchBar from '../components/SearchBar';
 import LeagueFilterRow from '../components/LeagueFilterRow';
+import LeagueSectionHeader from '../components/LeagueSectionHeader';
 import MatchCard from '../components/MatchCard';
 import MatchListSkeleton from '../components/MatchListSkeleton';
 import EmptyState from '../components/EmptyState';
@@ -58,6 +59,19 @@ export default function HomeScreen() {
     });
   }, [matches, selectedLeagueId, searchText]);
 
+  const sections = useMemo(() => {
+    const map = new Map<number, { league: League; data: typeof filteredMatches }>();
+    filteredMatches.forEach((match) => {
+      const existing = map.get(match.league.id);
+      if (existing) {
+        existing.data.push(match);
+      } else {
+        map.set(match.league.id, { league: match.league, data: [match] });
+      }
+    });
+    return Array.from(map.values());
+  }, [filteredMatches]);
+
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: theme.colors.background }]}
@@ -83,15 +97,17 @@ export default function HomeScreen() {
       ) : filteredMatches.length === 0 ? (
         <EmptyState message="Bu tarihte maç bulunamadı." />
       ) : (
-        <FlatList
-          data={filteredMatches}
+        <SectionList
+          sections={sections}
           keyExtractor={(item) => String(item.id)}
+          renderSectionHeader={({ section }) => <LeagueSectionHeader league={section.league} />}
           renderItem={({ item }) => (
             <MatchCard
               match={item}
               onPress={() => navigation.navigate('MatchDetail', { match: item })}
             />
           )}
+          stickySectionHeadersEnabled
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
         />

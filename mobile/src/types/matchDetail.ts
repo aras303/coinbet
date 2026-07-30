@@ -1,7 +1,10 @@
+export type OddsTrend = 'up' | 'down' | 'flat';
+
 export type OddsSelection = {
   id: string;
   label: string;
   value: string;
+  trend: OddsTrend;
 };
 
 export type OddsMarket = {

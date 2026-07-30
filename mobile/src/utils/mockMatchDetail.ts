@@ -4,6 +4,7 @@ import type {
   MatchStats,
   OddsCategory,
   OddsMarket,
+  OddsTrend,
   StandingsRow,
 } from '../types/matchDetail';
 import { formatKickoffTime } from './date';
@@ -99,12 +100,24 @@ export function getMockStandings(match: Match): StandingsRow[] {
     .map((row, index) => ({ ...row, position: index + 1 }));
 }
 
+function randomTrend(random: () => number): OddsTrend {
+  const roll = random();
+  if (roll < 0.3) return 'up';
+  if (roll < 0.6) return 'down';
+  return 'flat';
+}
+
 function market(
+  random: () => number,
   id: string,
   title: string,
   selections: { id: string; label: string; value: string }[],
 ): OddsMarket {
-  return { id, title, selections };
+  return {
+    id,
+    title,
+    selections: selections.map((selection) => ({ ...selection, trend: randomTrend(random) })),
+  };
 }
 
 export function getMockOddsByCategory(match: Match): Record<OddsCategory, OddsMarket[]> {
@@ -112,29 +125,29 @@ export function getMockOddsByCategory(match: Match): Record<OddsCategory, OddsMa
   const home = match.teams.home.name;
   const away = match.teams.away.name;
 
-  const matchWinner = market('match-winner', 'Maç Sonucu 1-X-2', [
+  const matchWinner = market(random, 'match-winner', 'Maç Sonucu 1-X-2', [
     { id: 'home', label: home, value: randomOdd(random, 1.5, 3.4) },
     { id: 'draw', label: 'Beraberlik', value: randomOdd(random, 2.8, 3.8) },
     { id: 'away', label: away, value: randomOdd(random, 1.8, 4.2) },
   ]);
 
-  const doubleChance = market('double-chance', 'Çifte Şans', [
+  const doubleChance = market(random, 'double-chance', 'Çifte Şans', [
     { id: '1x', label: `${home} veya Berabere`, value: randomOdd(random, 1.15, 1.5) },
     { id: '12', label: `${home} veya ${away}`, value: randomOdd(random, 1.1, 1.3) },
     { id: 'x2', label: `Berabere veya ${away}`, value: randomOdd(random, 1.2, 1.6) },
   ]);
 
-  const overUnder = market('over-under-2-5', '2.5 Alt/Üst', [
+  const overUnder = market(random, 'over-under-2-5', '2.5 Alt/Üst', [
     { id: 'under', label: 'Alt 2.5', value: randomOdd(random, 1.6, 2.1) },
     { id: 'over', label: 'Üst 2.5', value: randomOdd(random, 1.6, 2.1) },
   ]);
 
-  const bothTeamsScore = market('btts', 'Karşılıklı Gol', [
+  const bothTeamsScore = market(random, 'btts', 'Karşılıklı Gol', [
     { id: 'yes', label: 'Var', value: randomOdd(random, 1.6, 2.0) },
     { id: 'no', label: 'Yok', value: randomOdd(random, 1.7, 2.2) },
   ]);
 
-  const halfTimeResult = market('half-time-result', 'İlk Yarı Sonucu', [
+  const halfTimeResult = market(random, 'half-time-result', 'İlk Yarı Sonucu', [
     { id: 'home', label: home, value: randomOdd(random, 2.0, 3.2) },
     { id: 'draw', label: 'Beraberlik', value: randomOdd(random, 1.9, 2.3) },
     { id: 'away', label: away, value: randomOdd(random, 2.4, 4.0) },

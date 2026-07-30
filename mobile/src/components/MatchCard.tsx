@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import RemoteLogo from './RemoteLogo';
+import LiveDot from './LiveDot';
 import { useTheme } from '../theme/ThemeContext';
 import type { Match } from '../types/match';
 import { getStatusLabel, isFinishedMatch, isLiveMatch } from '../utils/match';
@@ -30,17 +31,7 @@ export default function MatchCard({ match, onPress }: Props) {
         },
       ]}
     >
-      <View style={styles.leagueRow}>
-        <RemoteLogo uri={match.league.logo} size={16} fallbackIcon="football-outline" />
-        <Text
-          style={[
-            styles.leagueName,
-            { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
-          ]}
-          numberOfLines={1}
-        >
-          {match.league.name}
-        </Text>
+      <View style={styles.topRow}>
         <View
           style={[
             styles.statusPill,
@@ -50,6 +41,7 @@ export default function MatchCard({ match, onPress }: Props) {
             },
           ]}
         >
+          {live ? <LiveDot color={theme.colors.primary} /> : null}
           <Text
             style={[
               styles.statusText,
@@ -164,19 +156,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 14,
   },
-  leagueRow: {
+  topRow: {
     flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+    justifyContent: 'flex-end',
     marginBottom: 14,
   },
-  leagueName: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: '700',
-    letterSpacing: 0.2,
-  },
   statusPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 9,
     paddingVertical: 4,
   },

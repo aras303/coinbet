@@ -10,9 +10,10 @@ import InfoRow from '../components/InfoRow';
 import StatCompareRow from '../components/StatCompareRow';
 import StandingsTable from '../components/StandingsTable';
 import EmptyState from '../components/EmptyState';
+import BetSlipBar from '../components/BetSlipBar';
 import { useTheme } from '../theme/ThemeContext';
 import type { RootStackParamList } from '../navigation/types';
-import type { OddsCategory } from '../types/matchDetail';
+import type { OddsCategory, OddsMarket } from '../types/matchDetail';
 import {
   getMockMatchInfo,
   getMockMatchStats,
@@ -35,6 +36,28 @@ export default function MatchDetailScreen({ route, navigation }: Props) {
   const standings = useMemo(() => getMockStandings(match), [match]);
   const oddsByCategory = useMemo(() => getMockOddsByCategory(match), [match]);
   const markets = oddsByCategory[activeOddsCategory];
+
+  const allMarkets = useMemo(() => {
+    const map = new Map<string, OddsMarket>();
+    Object.values(oddsByCategory).forEach((list) => {
+      list.forEach((marketItem) => map.set(marketItem.id, marketItem));
+    });
+    return map;
+  }, [oddsByCategory]);
+
+  const activeSelections = useMemo(() => {
+    return Object.entries(selectedOdds)
+      .filter(([, selectionId]) => selectionId)
+      .map(([marketId, selectionId]) => {
+        const marketItem = allMarkets.get(marketId);
+        return marketItem?.selections.find((selection) => selection.id === selectionId) ?? null;
+      })
+      .filter((selection): selection is NonNullable<typeof selection> => selection !== null);
+  }, [selectedOdds, allMarkets]);
+
+  const combinedOdds = activeSelections
+    .reduce((acc, selection) => acc * parseFloat(selection.value), 1)
+    .toFixed(2);
 
   function handleSelectOdd(marketId: string, selectionId: string) {
     setSelectedOdds((prev) => ({
@@ -138,6 +161,12 @@ export default function MatchDetailScreen({ route, navigation }: Props) {
           <StandingsTable rows={standings} />
         </ScrollView>
       ) : null}
+
+      <BetSlipBar
+        visible={activeSelections.length > 0}
+        count={activeSelections.length}
+        totalOdds={combinedOdds}
+      />
     </SafeAreaView>
   );
 }
@@ -151,12 +180,12 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingTop: 14,
-    paddingBottom: 24,
+    paddingBottom: 88,
   },
   infoContent: {
     paddingHorizontal: 16,
     paddingTop: 8,
-    paddingBottom: 24,
+    paddingBottom: 88,
   },
   statsTeamsRow: {
     flexDirection: 'row',

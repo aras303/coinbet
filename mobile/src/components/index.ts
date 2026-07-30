@@ -22,3 +22,6 @@ export { default as OddsMarketCard } from './OddsMarketCard';
 export { default as InfoRow } from './InfoRow';
 export { default as StatCompareRow } from './StatCompareRow';
 export { default as StandingsTable } from './StandingsTable';
+export { default as BetSlipBar } from './BetSlipBar';
+export { default as LeagueSectionHeader } from './LeagueSectionHeader';
+export { default as LiveDot } from './LiveDot';
