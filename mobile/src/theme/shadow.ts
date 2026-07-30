@@ -29,4 +29,16 @@ export const shadow = {
         shadowRadius: 12,
       },
     }),
+  // Softer colored elevation for resting cards — a plain black shadow.card
+  // barely reads against a near-black background, so surfaces looked flat.
+  ambient: (color: string) =>
+    Platform.select({
+      android: { elevation: 6 },
+      default: {
+        shadowColor: color,
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.28,
+        shadowRadius: 16,
+      },
+    }),
 } as const;

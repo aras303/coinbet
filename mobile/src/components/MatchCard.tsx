@@ -22,11 +22,11 @@ export default function MatchCard({ match, onPress }: Props) {
       onPress={onPress}
       style={({ pressed }) => [
         styles.card,
-        theme.shadow.card,
+        theme.shadow.ambient(live ? theme.colors.primary : theme.colors.primaryMuted),
         {
           backgroundColor: theme.colors.surface,
           borderColor: live ? `${theme.colors.primary}55` : theme.colors.border,
-          borderRadius: theme.radius.md,
+          borderRadius: theme.radius.lg,
           opacity: pressed ? 0.9 : 1,
         },
       ]}
@@ -124,7 +124,7 @@ function OddsPill({ label, value }: { label: string; value: string }) {
         styles.oddsPill,
         {
           backgroundColor: theme.colors.surfaceElevated,
-          borderColor: theme.colors.border,
+          borderColor: `${theme.colors.primary}30`,
           borderRadius: theme.radius.sm,
         },
       ]}
@@ -152,9 +152,9 @@ function OddsPill({ label, value }: { label: string; value: string }) {
 const styles = StyleSheet.create({
   card: {
     borderWidth: 1,
-    padding: 16,
+    padding: 18,
     marginHorizontal: 16,
-    marginBottom: 14,
+    marginBottom: 16,
   },
   topRow: {
     flexDirection: 'row',

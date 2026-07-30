@@ -10,12 +10,12 @@ export default function AmbientBackground() {
     <View style={StyleSheet.absoluteFill} pointerEvents="none">
       <Svg width="100%" height="100%">
         <Defs>
-          <RadialGradient id="glowTop" cx="82%" cy="0%" r="65%">
-            <Stop offset="0%" stopColor={theme.colors.primary} stopOpacity={0.16} />
+          <RadialGradient id="glowTop" cx="85%" cy="0%" r="60%">
+            <Stop offset="0%" stopColor={theme.colors.primary} stopOpacity={0.32} />
             <Stop offset="100%" stopColor={theme.colors.primary} stopOpacity={0} />
           </RadialGradient>
-          <RadialGradient id="glowBottom" cx="10%" cy="100%" r="55%">
-            <Stop offset="0%" stopColor={theme.colors.primaryMuted} stopOpacity={0.12} />
+          <RadialGradient id="glowBottom" cx="5%" cy="100%" r="55%">
+            <Stop offset="0%" stopColor={theme.colors.primaryMuted} stopOpacity={0.28} />
             <Stop offset="100%" stopColor={theme.colors.primaryMuted} stopOpacity={0} />
           </RadialGradient>
         </Defs>

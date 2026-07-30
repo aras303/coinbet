@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { ListIcon, CoinsIcon } from 'phosphor-react-native';
 import Logo from './Logo';
 import { useTheme } from '../theme/ThemeContext';
@@ -22,26 +23,26 @@ export default function TopBar({ onMenuPress }: Props) {
         <Logo size={20} />
       </View>
 
-      <View
+      <LinearGradient
+        colors={[theme.colors.primary, theme.colors.primaryMuted]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
         style={[
           styles.balance,
-          {
-            backgroundColor: `${theme.colors.primary}16`,
-            borderColor: `${theme.colors.primary}40`,
-            borderRadius: theme.radius.full,
-          },
+          theme.shadow.glow(theme.colors.primary),
+          { borderRadius: theme.radius.full },
         ]}
       >
-        <CoinsIcon size={15} color={theme.colors.primary} weight="duotone" />
+        <CoinsIcon size={15} color={theme.colors.background} weight="fill" />
         <Text
           style={[
             styles.balanceText,
-            { color: theme.colors.text, fontFamily: theme.typography.manrope.bold },
+            { color: theme.colors.background, fontFamily: theme.typography.manrope.extraBold },
           ]}
         >
           {COIN_BALANCE}
         </Text>
-      </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -63,8 +64,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    borderWidth: 1,
-    paddingHorizontal: 13,
+    paddingHorizontal: 14,
     paddingVertical: 7,
   },
   balanceText: {

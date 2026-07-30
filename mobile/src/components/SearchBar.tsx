@@ -15,10 +15,11 @@ export default function SearchBar({ value, onChangeText }: Props) {
     <View
       style={[
         styles.wrapper,
+        theme.shadow.ambient(theme.colors.primaryMuted),
         {
           backgroundColor: theme.colors.surface,
           borderColor: theme.colors.border,
-          borderRadius: theme.radius.md,
+          borderRadius: theme.radius.lg,
         },
       ]}
     >
