@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/LoginScreen';
 import MatchDetailScreen from '../screens/MatchDetailScreen';
 import WeeklyLoginScreen from '../screens/WeeklyLoginScreen';
+import EditProfileScreen from '../screens/EditProfileScreen';
 import MainTabs from './MainTabs';
 import { darkColors } from '../theme/colors';
 import type { RootStackParamList } from './types';
@@ -30,6 +31,7 @@ export default function RootNavigator() {
         <Stack.Screen name="Main" component={MainTabs} />
         <Stack.Screen name="MatchDetail" component={MatchDetailScreen} />
         <Stack.Screen name="WeeklyLogin" component={WeeklyLoginScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

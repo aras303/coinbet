@@ -1,11 +1,17 @@
 import React, { useMemo } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import InfoRow from '../components/InfoRow';
 import WinRateDonutChart from '../components/WinRateDonutChart';
 import { useTheme } from '../theme/ThemeContext';
 import { getMockProfileStats } from '../utils/mockProfile';
+import { useUsername } from '../hooks/useUsername';
+import type { RootStackParamList } from '../navigation/types';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 function formatRoi(value: number): string {
   return `${value > 0 ? '+' : ''}${value.toFixed(2)}%`;
@@ -13,7 +19,9 @@ function formatRoi(value: number): string {
 
 export default function ProfileScreen() {
   const theme = useTheme();
+  const navigation = useNavigation<NavigationProp>();
   const stats = useMemo(() => getMockProfileStats(), []);
+  const username = useUsername();
 
   return (
     <SafeAreaView
@@ -31,8 +39,9 @@ export default function ProfileScreen() {
                 styles.username,
                 { color: theme.colors.text, fontFamily: theme.typography.fontFamily },
               ]}
+              numberOfLines={1}
             >
-              {stats.username}
+              {username}
             </Text>
             <View style={styles.balanceRow}>
               <Ionicons name="cash-outline" size={14} color={theme.colors.primary} />
@@ -46,6 +55,27 @@ export default function ProfileScreen() {
               </Text>
             </View>
           </View>
+          <Pressable
+            onPress={() => navigation.navigate('EditProfile')}
+            style={[
+              styles.editButton,
+              {
+                backgroundColor: theme.colors.surfaceElevated,
+                borderColor: theme.colors.border,
+                borderRadius: theme.radius.sm,
+              },
+            ]}
+          >
+            <Ionicons name="pencil-outline" size={14} color={theme.colors.textSecondary} />
+            <Text
+              style={[
+                styles.editButtonText,
+                { color: theme.colors.textSecondary, fontFamily: theme.typography.fontFamily },
+              ]}
+            >
+              Düzenle
+            </Text>
+          </Pressable>
         </View>
 
         <View
@@ -298,6 +328,18 @@ const styles = StyleSheet.create({
   balance: {
     fontSize: 14,
     fontWeight: '800',
+  },
+  editButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    borderWidth: 1,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  editButtonText: {
+    fontSize: 12,
+    fontWeight: '700',
   },
   statsRow: {
     flexDirection: 'row',

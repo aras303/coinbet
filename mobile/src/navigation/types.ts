@@ -5,6 +5,7 @@ export type RootStackParamList = {
   Main: undefined;
   MatchDetail: { match: Match };
   WeeklyLogin: undefined;
+  EditProfile: undefined;
 };
 
 export type RootTabParamList = {
