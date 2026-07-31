@@ -9,15 +9,21 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Logo from '../components/Logo';
 import StadiumBackground from '../components/StadiumBackground';
 import TextField from '../components/TextField';
 import PrimaryButton from '../components/PrimaryButton';
 import TextLink from '../components/TextLink';
 import { useTheme } from '../theme/ThemeContext';
+import type { RootStackParamList } from '../navigation/types';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function LoginScreen() {
   const theme = useTheme();
+  const navigation = useNavigation<NavigationProp>();
   const [fade] = useState(() => new Animated.Value(0));
   const [slide] = useState(() => new Animated.Value(16));
 
@@ -60,7 +66,7 @@ export default function LoginScreen() {
               </View>
 
               <View style={styles.buttonSpacer} />
-              <PrimaryButton label="Giriş Yap" />
+              <PrimaryButton label="Giriş Yap" onPress={() => navigation.navigate('Main')} />
 
               <View style={styles.signupRow}>
                 <Text
@@ -74,7 +80,7 @@ export default function LoginScreen() {
                 >
                   Hesabın yok mu?{' '}
                 </Text>
-                <TextLink label="Hesap Oluştur" />
+                <TextLink label="Hesap Oluştur" onPress={() => navigation.navigate('Main')} />
               </View>
             </Animated.View>
           </ScrollView>
